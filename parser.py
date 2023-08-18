@@ -101,14 +101,17 @@ def parse_names_all(examples, names, batch_size=30):
 
     for i in range(0, len(names), batch_size):
         batch = names[i:i+batch_size]
-        pred = parse_names_once(examples, batch)
+        pred = []
+        
+        while len(pred) != len(batch):                      # retry if the output looks incomplete/incorrect
+            pred = parse_names_once(examples, batch)
 
-        if len(pred) != len(batch):
-            print(f'\n\nWARNING: Prediction and target sets have different lengths for a batch starting at {i}: {len(pred)} vs {len(batch)}')
-            if len(pred) > len(batch):
-                pred = pred[:len(batch)]                  # cut `pred` to make it the same length as `batch`
-            else:
-                pred += [''] * (len(batch) - len(pred))   # append empty lines to make `pred` the same length as `batch`
+        # if len(pred) != len(batch):
+        #     print(f'\n\nWARNING: Prediction and target sets have different lengths for a batch starting at {i}: {len(pred)} vs {len(batch)}')
+        #     if len(pred) > len(batch):
+        #         pred = pred[:len(batch)]                  # cut `pred` to make it the same length as `batch`
+        #     else:
+        #         pred += [''] * (len(batch) - len(pred))   # append empty lines to make `pred` the same length as `batch`
 
         output += pred
     
@@ -117,7 +120,7 @@ def parse_names_all(examples, names, batch_size=30):
     
 ########################################################################################################################
 
-EXPERIMENT = '008_full'
+EXPERIMENT = '009_full'
 
 
 def main():
