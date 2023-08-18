@@ -1,20 +1,25 @@
 """
 Parser of person names into first, middle, last names, plus prefixes, suffixes etc.
+The following entities are recognized:
+
+GivenName, Surname, MiddleName, FirstInitial, MiddleInitial, LastInitial, Nickname, PrefixMarital, PrefixOther,
+SuffixGenerational, SuffixOther, And
 
 Data set:
 https://github.com/datamade/probablepeople/blob/master/name_data/labeled/person_labeled.xml
+
+Author: Marcin Wojnarski (github.com/mwojnars)
 """
 
 import re
 import time
 import openai
+from itertools import zip_longest
 
 from data import load_data, count_labels, print_labels, split_data, select_examples, exclude_examples
+from metrics import calc_equal_line
+from mocks import mock_001
 
-
-EXAMPLES = \
-"""
-""".strip().splitlines()
 
 PROMPT = \
 """
@@ -26,7 +31,9 @@ Every sequence of 1+ non-whitespace characters must be annotated with an entity.
 
 {examples}
 
-Observe that entities can only start/end on whitespace; comma "," can be used to reverse the order of the given name vs surname;
+Observe that entities can only start and end on whitespace;
+comma "," can be used to reverse the order of given name vs surname;
+a single word may very well represent a surname rather than a given name;
 name prefixes and suffixes can be added for marital status, generation, education, profession etc.;
 initials and nicknames can be used instead, or in addition to, given names and surnames;
 "&" and "and" entities can be used to join multiple names (given names, surnames) on a single line.
@@ -77,7 +84,9 @@ def parse_names_openai(examples, names):
     end_time = time.time()
     print(f'\n\nTime elapsed: {end_time - start_time:.2f} seconds')
     
-    return output
+    output_lines = output.splitlines()
+    
+    return list(filter(None, [line.strip() for line in output_lines]))
     
     
 ########################################################################################################################
@@ -102,8 +111,24 @@ def main():
     print_labels(examples)
     # print('\n\nTest set:')
     # print('\n'.join(test))
-
-    output = parse_names_openai(examples, test[::50])
+    
+    true = test[::50]
+    pred = parse_names_openai(examples, true)
+    
+    # true, pred, _ = mock_001()
+    
+    # print predictions vs targets side by side on the same line
+    print(f'\n\nPredictions ({len(pred)}) vs Targets ({len(true)}):')
+    for t, p in list(zip_longest(true, pred)):
+        print()
+        print('pred: ', p)
+        print('true: ', t)
+        # print(f'{p:120}  |  {t}')
+        
+    # print metrics...
+    # how many lines in the output are strictly equal to the target, printed as percentage
+    print('\n\nMetrics:')
+    print(f'strictly equal: {calc_equal_line(true, pred):.2f}')
     
 
 if __name__ == '__main__':

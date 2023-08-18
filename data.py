@@ -1,5 +1,7 @@
 """
 Data loading and preprocessing.
+
+Author: Marcin Wojnarski (github.com/mwojnars)
 """
 
 import re
