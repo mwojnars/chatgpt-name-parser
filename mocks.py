@@ -10,6 +10,7 @@ def mock_001():
         'John Smith',
         'Laura Perlman',
         'William C. & Cathy B. Coody',
+        'Anxiao (Andrew) Jiang',
     ]
     pred = [
         '<GivenName>John</GivenName> <Surname>Smith</Surname>',
@@ -20,6 +21,7 @@ def mock_001():
         '<GivenName>John</GivenName> <Surname>Smith</Surname>',
         '<GivenName>Laura</GivenName> <Surname>Perlman</Surname>',
         '<GivenName>William</GivenName> <MiddleInitial>C</MiddleInitial> <SuffixOther>&amp;</SuffixOther> <GivenName>Cathy</GivenName> <MiddleInitial>B.</MiddleInitial> <Surname>Coody</Surname>',
+        '<GivenName>Anxiao</GivenName> <Nickname>(Andrew)</Nickname> <Surname>Jiang</Surname>',
     ]
     return true, pred, samp
 

@@ -17,7 +17,7 @@ import openai
 from itertools import zip_longest
 
 from data import load_data, count_labels, print_labels, split_data, select_examples, exclude_examples
-from metrics import calc_equal_line
+from metrics import calc_equal_lines, calc_equal_labels_in_line, calc_equal_all_labels_in_line
 from mocks import mock_001
 
 
@@ -67,7 +67,7 @@ def parse_names_openai(examples, names):
     prompt = build_prompt(examples, names)
     length = len(prompt)
     
-    print(f'\n\nPrompt ({length} characters, approx. {int(length/3.5)} tokens):')
+    print(f'\n\nPrompt ({length} characters, approx. {int(length/3.0)} tokens):')
     print(prompt)
 
     # response = openai.Completion.create(engine='davinci', prompt=prompt, max_tokens=800) #, temperature=0.0, top_p=1.0, frequency_penalty=0.0, presence_penalty=0.0, stop=['\n'])
@@ -112,10 +112,10 @@ def main():
     # print('\n\nTest set:')
     # print('\n'.join(test))
     
-    true = test[::50]
-    pred = parse_names_openai(examples, true)
+    # true = test[::10]
+    # pred = parse_names_openai(examples, true)
     
-    # true, pred, _ = mock_001()
+    true, pred, _ = mock_001()
     
     # print predictions vs targets side by side on the same line
     print(f'\n\nPredictions ({len(pred)}) vs Targets ({len(true)}):')
@@ -128,7 +128,9 @@ def main():
     # print metrics...
     # how many lines in the output are strictly equal to the target, printed as percentage
     print('\n\nMetrics:')
-    print(f'strictly equal: {calc_equal_line(true, pred):.2f}')
+    print(f'no. of identical lines:                  {calc_equal_lines(true, pred):.1%}')
+    print(f'no. of lines with all identical labels:  {calc_equal_all_labels_in_line(true, pred):.1%}')
+    print(f'no. of individual identical labels:      {calc_equal_labels_in_line(true, pred):.1%}')
     
 
 if __name__ == '__main__':
