@@ -32,22 +32,20 @@ Every sequence of 1+ non-whitespace characters must be annotated with an entity.
 
 {examples}
 
-Now, parse the following list of raw names and output corresponding annotations.
+Observe that entities only include non-space characters and can only start and end on whitespace;
+comma "," can be used to reverse the order of given name vs surname;
+a single-word name may very well represent a surname rather than a given name;
+name prefixes and suffixes can be added for marital status, generation, education, profession etc.;
+initials and nicknames can be used instead, or in addition to, given names and surnames;
+"&" and "and" entities can be used to join multiple names (given names, surnames) on a single line;
+"Mr" should be treated as PrefixMarital not Other.
+
+Now, when you understand the rules, parse the following list of raw names and output corresponding annotations.
 Do NOT output anything else: no description, no line numbers, no bullet points. Do NOT insert any extra
 characters to the raw text inside annotations, nor change existing raw characters. Input names:
 
 {names}
 """
-
-# Observe that entities don't include spaces and can only start and end on whitespace;
-# comma "," can be used to reverse the order of given name vs surname;
-# a single-word name may very well represent a surname rather than a given name;
-# name prefixes and suffixes can be added for marital status, generation, education, profession etc.;
-# initials and nicknames can be used instead, or in addition to, given names and surnames;
-# "&" and "and" entities can be used to join multiple names (given names, surnames) on a single line;
-# "Mr" should be treated as PrefixMarital not Other.
-#
-# Now, when you understand the rules,
 
 
 def build_prompt(examples, names_annotated):
@@ -100,18 +98,22 @@ def parse_names_all(examples, names, batch_size=30):
     output = []
 
     for i in range(0, len(names), batch_size):
+        print(f'\nParsing batch starting at {i}...')
         batch = names[i:i+batch_size]
         pred = []
         
-        while len(pred) != len(batch):                      # retry if the output looks incomplete/incorrect
+        retry = 0
+        while len(pred) != len(batch):                      # retry max 5 times if the output looks incomplete/incorrect
+            if retry > 5: break
             pred = parse_names_once(examples, batch)
+            retry += 1
 
-        # if len(pred) != len(batch):
-        #     print(f'\n\nWARNING: Prediction and target sets have different lengths for a batch starting at {i}: {len(pred)} vs {len(batch)}')
-        #     if len(pred) > len(batch):
-        #         pred = pred[:len(batch)]                  # cut `pred` to make it the same length as `batch`
-        #     else:
-        #         pred += [''] * (len(batch) - len(pred))   # append empty lines to make `pred` the same length as `batch`
+        if len(pred) != len(batch):
+            print(f'\n\nWARNING: Prediction and target sets have different lengths for a batch starting at {i}: {len(pred)} vs {len(batch)}')
+            if len(pred) > len(batch):
+                pred = pred[:len(batch)]                  # cut `pred` to make it the same length as `batch`
+            else:
+                pred += [''] * (len(batch) - len(pred))   # append empty lines to make `pred` the same length as `batch`
 
         output += pred
     
@@ -120,7 +122,7 @@ def parse_names_all(examples, names, batch_size=30):
     
 ########################################################################################################################
 
-EXPERIMENT = '009_full'
+EXPERIMENT = '010_full'
 
 
 def main():
