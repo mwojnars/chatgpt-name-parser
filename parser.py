@@ -33,7 +33,7 @@ Every sequence of 1+ non-whitespace characters must be annotated with an entity.
 
 Observe that entities don't include spaces and can only start and end on whitespace;
 comma "," can be used to reverse the order of given name vs surname;
-a single-word name may be a surname rather than a given name;
+a single-word name may very well represent a surname rather than a given name;
 name prefixes and suffixes can be added for marital status, generation, education, profession etc.;
 initials and nicknames can be used instead, or in addition to, given names and surnames;
 "&" and "and" entities can be used to join multiple names (given names, surnames) on a single line;
@@ -115,7 +115,7 @@ def parse_names_all(examples, names, batch_size=30):
     
 ########################################################################################################################
 
-EXPERIMENT = '005'
+EXPERIMENT = '006_full'
 
 
 def main():
@@ -138,8 +138,8 @@ def main():
     
     true, pred, _ = mock_001()
     
-    # true = test[::10]
-    # pred = parse_names_all(examples, true)
+    true = test #[::10]
+    pred = parse_names_all(examples, true)
     
     write_to_excel(true, pred, f'../experiments/out_{EXPERIMENT}.xlsx')
     
