@@ -14,6 +14,7 @@ Author: Marcin Wojnarski (github.com/mwojnars)
 import re
 import time
 import openai
+import random
 from itertools import zip_longest
 
 from data import load_data, count_labels, print_labels, split_data, select_examples, exclude_examples, write_to_excel
@@ -115,7 +116,7 @@ def parse_names_all(examples, names, batch_size=30):
     
 ########################################################################################################################
 
-EXPERIMENT = '006_full'
+EXPERIMENT = '007_full'
 
 
 def main():
@@ -138,7 +139,10 @@ def main():
     
     true, pred, _ = mock_001()
     
-    true = test #[::10]
+    # true = test[::10]
+    true = test
+    random.shuffle(true)      # shuffling may improve the prompt: the model sees a more diverse set of samples each time
+    
     pred = parse_names_all(examples, true)
     
     write_to_excel(true, pred, f'../experiments/out_{EXPERIMENT}.xlsx')
