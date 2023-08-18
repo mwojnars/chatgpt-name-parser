@@ -6,7 +6,9 @@ Author: Marcin Wojnarski (github.com/mwojnars)
 
 import re
 import random
+import xlsxwriter
 from collections import Counter
+from itertools import zip_longest
 
 
 def data_cleaning(xml):
@@ -132,3 +134,19 @@ def select_examples(lines, size=30, k=3, seed=12345):
             output.add(sample)
     
     return sorted(output)
+
+
+def write_to_excel(true, pred, filename):
+    """
+    Write predictions and targets to an Excel file in two separate columns.
+    Add a marker in the third column if the prediction is different from the target.
+    """
+    workbook = xlsxwriter.Workbook(filename)
+    worksheet = workbook.add_worksheet()
+    worksheet.write_row(0, 0, ['Prediction', 'Target', 'Diff'])
+    
+    for i, (t, p) in enumerate(zip_longest(true, pred)):
+        worksheet.write_row(i+2, 0, [p, t, '*' if p != t else ''])
+        
+    workbook.close()
+    

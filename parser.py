@@ -16,7 +16,7 @@ import time
 import openai
 from itertools import zip_longest
 
-from data import load_data, count_labels, print_labels, split_data, select_examples, exclude_examples
+from data import load_data, count_labels, print_labels, split_data, select_examples, exclude_examples, write_to_excel
 from metrics import calc_equal_lines, calc_equal_labels_in_line, calc_equal_all_labels_in_line
 from mocks import mock_001
 
@@ -115,6 +115,8 @@ def parse_names_all(examples, names, batch_size=30):
     
 ########################################################################################################################
 
+EXPERIMENT = '005'
+
 
 def main():
     start_time = time.time()
@@ -136,8 +138,10 @@ def main():
     
     true, pred, _ = mock_001()
     
-    true = test[::10]
-    pred = parse_names_all(examples, true)
+    # true = test[::10]
+    # pred = parse_names_all(examples, true)
+    
+    write_to_excel(true, pred, f'../experiments/out_{EXPERIMENT}.xlsx')
     
     # print predictions vs targets side by side for comparison
     print(f'\n\nPredictions ({len(pred)}) vs Targets ({len(true)}):')
