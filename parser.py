@@ -90,7 +90,7 @@ def parse_names_once(examples, names):
     return list(filter(None, [line.strip() for line in output_lines]))
     
     
-def parse_names_all(examples, names, batch_size=50):
+def parse_names_all(examples, names, batch_size=30):
     """
     Parse a (large) set of names in multiple calls to OpenAI API. Merge the results.
     """
@@ -116,11 +116,12 @@ def parse_names_all(examples, names, batch_size=50):
 
 
 def main():
+    start_time = time.time()
+
     lines = load_data('person_labeled.xml')
-    print('\n'.join(lines))
-    print()
-    
-    print_labels(lines)
+    # print('\n'.join(lines))
+    # print()
+    # print_labels(lines)
     
     # select a short list of examples in a smart way, so that each label is represented by at least 4 samples
     examples = select_examples(lines, size=30, k=4)
@@ -135,7 +136,7 @@ def main():
     # print('\n\nTest set:')
     # print('\n'.join(test))
     
-    # true, pred, _ = mock_001()
+    true, pred, _ = mock_001()
     
     # true = test[::50]
     # pred = parse_names_once(examples, true)
@@ -160,7 +161,11 @@ def main():
     
     if (len(pred) != len(true)):
         print(f'\n\nWARNING: Prediction and target sets have different lengths: {len(pred)} vs {len(true)}')
-    
+
+    end_time = time.time()
+    print(f'\n\nSamples processed:  {len(true)}')
+    print(f'Time elapsed:       {end_time - start_time:.2f} seconds')
+
 
 if __name__ == '__main__':
     main()
