@@ -57,9 +57,10 @@ def build_prompt(examples, names_annotated):
     return PROMPT.format(examples='\n'.join(examples), names='\n'.join(names))
     
     
-def parse_names_openai(examples, names):
+def parse_names_once(examples, names):
     """
-    Parse names using OpenAI API.
+    Parse a (small) batch of names in a single call to OpenAI API.
+    This function should be called multiple times to parse a large batch of names.
     OpenAI API key must be stored in OPENAI_API_KEY environment variable.
     """
     start_time = time.time()
@@ -89,6 +90,28 @@ def parse_names_openai(examples, names):
     return list(filter(None, [line.strip() for line in output_lines]))
     
     
+def parse_names_all(examples, names, batch_size=50):
+    """
+    Parse a (large) set of names in multiple calls to OpenAI API. Merge the results.
+    """
+    output = []
+
+    for i in range(0, len(names), batch_size):
+        batch = names[i:i+batch_size]
+        pred = parse_names_once(examples, batch)
+
+        if len(pred) != len(batch):
+            print(f'\n\nWARNING: Prediction and target sets have different lengths for a batch starting at {i}: {len(pred)} vs {len(batch)}')
+            if len(pred) > len(batch):
+                pred = pred[:len(batch)]                  # cut `pred` to make it the same length as `batch`
+            else:
+                pred += [''] * (len(batch) - len(pred))   # append empty lines to make `pred` the same length as `batch`
+
+        output += pred
+    
+    return output
+    
+    
 ########################################################################################################################
 
 
@@ -112,12 +135,15 @@ def main():
     # print('\n\nTest set:')
     # print('\n'.join(test))
     
-    true = test[::20]
-    pred = parse_names_openai(examples, true)
-    
     # true, pred, _ = mock_001()
     
-    # print predictions vs targets side by side on the same line
+    # true = test[::50]
+    # pred = parse_names_once(examples, true)
+    
+    true = test[::10]
+    pred = parse_names_all(examples, true)
+    
+    # print predictions vs targets side by side for comparison
     print(f'\n\nPredictions ({len(pred)}) vs Targets ({len(true)}):')
     for t, p in list(zip_longest(true, pred)):
         print()
@@ -131,6 +157,9 @@ def main():
     print(f'no. of identical lines:                  {calc_equal_lines(true, pred):.1%}')
     print(f'no. of lines with all identical labels:  {calc_equal_all_labels_in_line(true, pred):.1%}')
     print(f'no. of individual identical labels:      {calc_equal_labels_in_line(true, pred):.1%}')
+    
+    if (len(pred) != len(true)):
+        print(f'\n\nWARNING: Prediction and target sets have different lengths: {len(pred)} vs {len(true)}')
     
 
 if __name__ == '__main__':
