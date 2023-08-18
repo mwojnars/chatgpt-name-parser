@@ -105,7 +105,17 @@ def parse_names_all(examples, names, batch_size=30):
         retry = 0
         while len(pred) != len(batch):                      # retry max 5 times if the output looks incomplete/incorrect
             if retry > 5: break
-            pred = parse_names_once(examples, batch)
+            if retry > 0: print(f'\nRetrying ({retry})...')
+            
+            try:
+                pred = parse_names_once(examples, batch)
+
+            except openai.error.APIError as e:
+                print(f'\n\nAPI ERROR: {e}')
+                print(f'Will call again after 10 seconds...')
+                time.sleep(10)
+                continue
+            
             retry += 1
 
         if len(pred) != len(batch):
