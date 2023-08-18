@@ -19,7 +19,7 @@ def calc_equal_all_labels_in_line(true, pred):
 
 
 def calc_equal_labels_in_line(true, pred):
-    """Fraction 0.0-1.0 of labels in the output that are identical to the target label on the same position in a line."""
-    return (sum([1 for i in range(len(true)) for t, p in zip(get_labels(true[i]), get_labels(pred[i])) if t == p])
-            / sum([len(get_labels(true[i])) for i in range(len(true))]))
+    """Fraction 0.0-1.0 of labels in the output that are identical to the target label on the same position in line."""
+    return (sum(t == p for t_line, p_line in zip(true, pred) for t, p in zip(get_labels(t_line), get_labels(p_line)))
+            / sum([len(get_labels(t_line)) for t_line in true]))
 

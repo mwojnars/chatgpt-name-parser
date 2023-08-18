@@ -112,10 +112,10 @@ def main():
     # print('\n\nTest set:')
     # print('\n'.join(test))
     
-    # true = test[::10]
-    # pred = parse_names_openai(examples, true)
+    true = test[::20]
+    pred = parse_names_openai(examples, true)
     
-    true, pred, _ = mock_001()
+    # true, pred, _ = mock_001()
     
     # print predictions vs targets side by side on the same line
     print(f'\n\nPredictions ({len(pred)}) vs Targets ({len(true)}):')
