@@ -132,7 +132,7 @@ def parse_names_all(examples, names, batch_size=30):
     
 ########################################################################################################################
 
-EXPERIMENT = '010_full'
+EXPERIMENT = '012_full'
 
 
 def main():
@@ -144,7 +144,7 @@ def main():
     # print_labels(lines)
     
     # select a short list of examples in a smart way, so that each label is represented by at least 5 samples
-    examples = select_examples(lines, size=30, k=4)
+    examples = select_examples(lines, size=40, k=5)
     
     # use remaining lines as test set
     test = exclude_examples(lines, examples)
