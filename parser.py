@@ -31,12 +31,13 @@ Every sequence of 1+ non-whitespace characters must be annotated with an entity.
 
 {examples}
 
-Observe that entities can only start and end on whitespace;
+Observe that entities don't include spaces and can only start and end on whitespace;
 comma "," can be used to reverse the order of given name vs surname;
-a single word may very well represent a surname rather than a given name;
+a single-word name may be a surname rather than a given name;
 name prefixes and suffixes can be added for marital status, generation, education, profession etc.;
 initials and nicknames can be used instead, or in addition to, given names and surnames;
-"&" and "and" entities can be used to join multiple names (given names, surnames) on a single line.
+"&" and "and" entities can be used to join multiple names (given names, surnames) on a single line;
+"Mr" should be treated as PrefixMarital not Other.
 
 Now, when you understand the rules, parse the following list of raw names and output corresponding annotations.
 Do NOT output anything else: no description, no line numbers, no bullet points. Do NOT insert any extra
@@ -68,7 +69,7 @@ def parse_names_once(examples, names):
     prompt = build_prompt(examples, names)
     length = len(prompt)
     
-    print(f'\n\nPrompt ({length} characters, approx. {int(length/3.0)} tokens):')
+    print(f'\nPrompt ({length} characters, approx. {int(length/3.0)} tokens):')
     print(prompt)
 
     # response = openai.Completion.create(engine='davinci', prompt=prompt, max_tokens=800) #, temperature=0.0, top_p=1.0, frequency_penalty=0.0, presence_penalty=0.0, stop=['\n'])
@@ -123,23 +124,17 @@ def main():
     # print()
     # print_labels(lines)
     
-    # select a short list of examples in a smart way, so that each label is represented by at least 4 samples
+    # select a short list of examples in a smart way, so that each label is represented by at least 5 samples
     examples = select_examples(lines, size=30, k=4)
     
     # use remaining lines as test set
     test = exclude_examples(lines, examples)
     
-    # examples, test = split_data(lines)
-    print(f'\n\nExample set ({len(examples)}):')
-    print('\n'.join(examples))
-    print_labels(examples)
-    # print('\n\nTest set:')
-    # print('\n'.join(test))
+    # print(f'\n\nExample set ({len(examples)}):')
+    # print('\n'.join(examples))
+    # print_labels(examples)
     
     true, pred, _ = mock_001()
-    
-    # true = test[::50]
-    # pred = parse_names_once(examples, true)
     
     true = test[::10]
     pred = parse_names_all(examples, true)

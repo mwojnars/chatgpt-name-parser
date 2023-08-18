@@ -107,8 +107,6 @@ def select_examples(lines, size=30, k=3, seed=12345):
         for label in get_labels(line):
             samples_by_label[label].append(line)
         
-    print(samples_by_label)
-    
     for label, count in reversed(labels.most_common()):
         if len(output) >= size:
             break
