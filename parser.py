@@ -28,8 +28,8 @@ You are a Named Entity Recognition (NER) tool that takes person names on input a
 different parts of the name: given name, surname, initials etc. You are allowed to use the following entities:
 GivenName, MiddleName, Surname, FirstInitial, MiddleInitial, LastInitial, Nickname, PrefixMarital, PrefixOther,
 SuffixGenerational, SuffixOther, And.
-
-Every subsequence of 1+ non-whitespace characters in a line must be annotated with an entity. Example output:
+Every subsequence of 1+ non-whitespace characters in a line must be annotated with an entity from the above list.
+Example output:
 
 {examples}
 
@@ -39,8 +39,7 @@ a single-word name may very well represent a surname rather than a given name;
 name prefixes and suffixes can be added for marital status, generation, education, profession etc.;
 initials and nicknames can be used instead, or in addition to, given names and surnames;
 "&" and "and" entities can be used to join multiple names (given names, surnames) on a single line;
-"Mr" should be treated as PrefixMarital not Other;
-an input word should NEVER be converted to a label: "Smith" to <Smith/> or "J" to <J/> is INCORRECT!
+"Mr" should be treated as PrefixMarital not Other.
 
 Now, when you understand the rules, parse the following list of raw names and output corresponding annotations.
 Do NOT output anything else: no description, no line numbers, no bullet points. Do NOT insert any extra
@@ -98,7 +97,7 @@ def parse_names_once(examples, names):
     return list(filter(None, [line.strip() for line in output_lines]))
     
     
-def parse_names_all(examples, names, batch_size=50, max_retry=10):
+def parse_names_all(examples, names, batch_size=30, max_retry=10):
     """
     Parse a (large) set of names in multiple calls to OpenAI API. Merge the results.
     """
@@ -139,10 +138,12 @@ def parse_names_all(examples, names, batch_size=50, max_retry=10):
     
 def wrong_syntax(pred, threshold=0.1):
     """
-    Return True if 20% or more samples in the ChatGPT output have incorrect syntax: no XML tags
+    Return True if 10% or more samples in the ChatGPT output have incorrect syntax: no XML tags, self-closing tags,
     or the tags have wrong names.
     """
-    labels = [get_labels(line) for line in pred]                # list of labels in each line
+    
+    # lists of labels in each line; self-closing tags are included (e.g. <GivenName/>) and treated as incorrect
+    labels = [re.findall(r'<([a-zA-Z]+/?)>', line) for line in pred]
     
     # count samples with no XML tags
     no_tags = sum(1 for lbl in labels if not lbl)
@@ -151,7 +152,7 @@ def wrong_syntax(pred, threshold=0.1):
     wrong_tags = sum(1 for lbl in labels if lbl and not all(tag in ENTITIES for tag in lbl))
     
     if no_tags + wrong_tags >= threshold * len(pred):
-        print(f'\n\nWARNING: {no_tags} outputs with no proper XML tags, {wrong_tags} outputs with wrong XML tags')
+        print(f'\n\nWARNING: {wrong_tags} outputs with wrong XML tags + {no_tags} outputs with no proper XML tags')
         return True
     
     return False
@@ -183,6 +184,7 @@ def main():
     true, pred, _ = mock_001()
     
     true = test[::10]
+    random.shuffle(true)
     pred = parse_names_all(examples, true)
     
     write_to_excel(true, pred, f'../experiments/out_{EXPERIMENT}.xlsx')
