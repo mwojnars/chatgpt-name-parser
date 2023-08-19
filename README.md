@@ -60,7 +60,7 @@ The prompt is engineered in such a way that it includes:
 
 - a task description with a complete list of entities that should be recognized;
 - a list of examples of each entity type, which serves as a few-shot learning dataset;
-- a brief review of the annotation rules and important edge cases that should be taken into account;
+- a brief summary of the annotation rules and important edge cases that should be taken into account;
 - a list of raw input names to be parsed in a given batch.
 
 The prompt template is defined in the [PROMPT](https://github.com/mwojnars/chatgpt-name-parser/blob/df2509cc2d310ba5b9bcda2bed6737d95d2318f7/parser.py#L25C1-L48) 
@@ -68,19 +68,18 @@ constant in parser.py.
 
 The parser submits up to 30 samples at a time to ChatGPT (a *batch*).
 Submitting a larger batch is technically possible, but causes instability of the model output,
-which tends to be broken more frequently (e.g., it may contain an insufficient number of output lines).
+which tends to be broken more frequently.
 
-Whenever the ChatGPT output looks incorrect - as judged by the number of lines - the API call is repeated 
-with the same input. The number of retries is limited to 5, after which the broken output is used anyway.
+Whenever the ChatGPT output looks incorrect - contains invalid tags or insufficient number of output lines -
+the API call is repeated with the same input. The number of retries is limited to 10.
 
 The choice of examples for the few-shot learning dataset appeared to be crucial for the model performance.
 Initially, the examples were selected randomly from the entire dataset, but this approach resulted in a small
 diversity of the set and lower performance of the parser on the test data.
 The final version of the algorithm uses a more sophisticated approach, where the selection process
-takes care to include a predefined number of occurrences of each entity type. More specifically, the example set 
-includes 40 samples, and each entity type is represented by at least 5 different samples in the set.
-See the `select_examples()` function in [data.py](https://github.com/mwojnars/chatgpt-name-parser/blob/df2509cc2d310ba5b9bcda2bed6737d95d2318f7/data.py#L95)
-for details.
+takes care to include a minimum predefined number of occurrences of each entity type. Specifically, the example set 
+includes 40 samples and each entity type is represented by at least 5 different samples in the set.
+See the `select_examples()` function in [data.py](https://github.com/mwojnars/chatgpt-name-parser/blob/df2509cc2d310ba5b9bcda2bed6737d95d2318f7/data.py#L95) for details.
 
 
 ## Performance Metrics
@@ -97,16 +96,17 @@ B. **Entity-level Exact Match Accuracy** (function `calc_equal_all_labels_in_lin
    list of entity labels is identical to the ground truth list of labels.
 
 C. **Entity-level Label Match Accuracy** (function `calc_equal_labels_in_line`) - 
-   the percentage of labels in the output that are identical to the ground truth labels,
-   averaged over all ground-truth labels in all samples; here, more complex samples (with more entities) 
-   contribute more to the metric, unlike the previous metrics, which are calculated on a per-sample basis
-   and treat each sample - whether short or long - equally.
+   the percentage of labels in the output that are identical to the ground truth labels
+   on the corresponding positions in a line (order of entities preserved),
+   averaged over all ground-truth labels in all samples; complex samples (with more entities) 
+   contribute more to the metric, unlike in the previous metrics which are calculated on a per-sample basis
+   and then averaged over all samples.
 
 It should be noted that ChatGPT occasionally changes the raw text of the input names, e.g.,
-by adding missing dots after prefixes or initials. If this behavior is undesired, the output can be easily fixed
-by additional post-processing - not included in the current version of the parser. The metrics B and C only 
-compare the entities' labels and not their contents,
-which makes them more robust to this type of occasional alterations in the raw text.
+by adding missing dots after prefixes or initials, or by removing surrounding quotes and parentheses around nicknames. 
+If this behavior is undesired, the output can be easily fixed by post-processing, which is 
+not included in the current version of the parser. The metrics B and C only compare the entities' labels, 
+not their contents, which makes them more robust to this type of occasional alterations in the raw text.
 
 The metric C is treated as the primary one, because - unlike the other two - it counts accuracy 
 on a per-entity, rather than per-sample, basis.
@@ -114,5 +114,23 @@ on a per-entity, rather than per-sample, basis.
 
 ## Results
 
+After improvements in the prompt template and hyperparameters, the parser achieves
+**82.0%** accuracy of **entity recognition** as measured by the metric C on the test set.
 
-- difficult dataset
+Parsing of the entire set of approx. 3000 samples takes about 1000 seconds when batches
+of 30 samples are submitted, which translates to approx. 0.33 sec per sample.
+The cost of the API calls is $0.30 for a full run over the entire data set,
+which is 1 cent per 100 samples.
+
+It should be noted that the dataset is quite difficult, because it contains many types of entities
+(12 in total) and many edge cases; a significant number of samples contain Asian names, 
+which are more difficult to parse than the Western ones; and the dataset contains 
+some obvious errors or ambiguities, like annotating "DAVID", or "HANNA", or "RYAN",  
+as surnames instead of given names.
+
+All in all, there is still large room for improvement in the algorithm:
+through model fine-tuning, better choice of hyperparameters, prompt engineering, 
+post-processing of the output, etc. - it's very likely the algorithm's accuracy 
+could surpass 90% on this dataset after improvements.
+
+
