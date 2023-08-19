@@ -116,21 +116,21 @@ on a per-entity, rather than per-sample, basis.
 
 After improvements in the prompt template and hyperparameters, the parser achieves
 **82.0%** accuracy of **entity recognition** as measured by the metric C on the test set.
+The accuracy of character-level (metric A) and entity-level (metric B) full exact matches is 67.4% and 69.0%, respectively.
 
-Parsing of the entire set of approx. 3000 samples takes about 1000 seconds when batches
+Parsing of the entire set of 3000 samples takes about 1000 seconds when batches
 of 30 samples are submitted, which translates to approx. 0.33 sec per sample.
 The cost of the API calls is $0.30 for a full run over the entire data set,
 which is 1 cent per 100 samples.
 
 It should be noted that the dataset is quite difficult, because it contains many types of entities
 (12 in total) and many edge cases; a significant number of samples contain Asian names, 
-which are more difficult to parse than the Western ones; and the dataset contains 
-some obvious errors or ambiguities, like annotating "DAVID", or "HANNA", or "RYAN",  
-as surnames instead of given names.
+which are more difficult to parse than the Western ones; also, the dataset contains 
+some obvious errors or ambiguities, like annotating "DAVID", or "HANNA", or "RYAN", as surnames instead of given names.
 
 All in all, there is still large room for improvement in the algorithm:
 through model fine-tuning, better choice of hyperparameters, prompt engineering, 
-post-processing of the output, etc. - it's very likely the algorithm's accuracy 
+post-processing of the output, etc. It is very likely the algorithm's accuracy 
 could surpass 90% on this dataset after improvements.
 
 

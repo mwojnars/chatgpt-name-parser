@@ -160,7 +160,7 @@ def wrong_syntax(pred, threshold=0.1):
     
 ########################################################################################################################
 
-EXPERIMENT = '014'
+EXPERIMENT = '016_full'
 
 
 def main():
@@ -183,7 +183,7 @@ def main():
     
     true, pred, _ = mock_001()
     
-    true = test[::10]
+    true = test   # [::10]
     random.shuffle(true)
     pred = parse_names_all(examples, true)
     
