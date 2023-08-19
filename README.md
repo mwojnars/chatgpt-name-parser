@@ -1,9 +1,12 @@
 # ChatGPT Name Parser
 
-Experimental parser of person names into first/middle/last names, initials, marital status,
-profession suffix etc. Uses ChatGPT API. The main files:
+Experimental parser of person names into first / middle / last names, initials, marital status,
+profession suffix etc. The problem is framed as a 
+[Named-Entity Recognition](https://en.wikipedia.org/wiki/Named-entity_recognition) (NER) task 
+and solved with the use of a ChatGPT model through OpenAI's API. The main files:
+
 - [parser.py](https://github.com/mwojnars/chatgpt-name-parser/blob/master/parser.py) - 
-  main script that parses the names from `person_labeled.xml` and calculates performance metrics;
+  main script that submits the raw names from `person_labeled.xml` to ChatGPT, parses the output and calculates performance metrics;
 - [data.py](https://github.com/mwojnars/chatgpt-name-parser/blob/master/data.py) - 
   data loading and preprocessing;
 - [metrics.py](https://github.com/mwojnars/chatgpt-name-parser/blob/master/metrics.py) - 
@@ -19,7 +22,7 @@ The parsing algorithm calls `gpt-3.5-turbo` model via ChatGPT API; submits a lis
 names together with a detailed task description; and receives XML code that contains 
 the same names, but partitioned into entities with proper XML annotations.
 
-The following 12 entities are recognized:
+The following 12 types of entities are recognized:
 
 `GivenName`, `Surname`, `MiddleName`, `FirstInitial`, `MiddleInitial`, `LastInitial`, 
 `Nickname`, `PrefixMarital`, `PrefixOther`, `SuffixGenerational`, `SuffixOther`, `And`.
@@ -40,5 +43,20 @@ The number of occurrences of each entity in the dataset is shown below:
   63  PrefixOther
   46  LastInitial
 ```
+
+## Algorithm
+
+ChatGPT was selected as the underlying NLP model because of its high performance, versatility, 
+and the ease of use through the OpenAI's API. Unlike the foundational LLM models, ChatGPT was fine-tuned for dialog
+and underwent a multi-stage training process that included Reinforcement Learning from Human Feedback (RLHF),
+which makes the model capable of understanding zero-shot and few-shot NLP tasks 
+(the tasks it was not specifically trained for), if only a proper task description is provided at the prompt.
+This enables fast prototyping for new NLP tasks, while still allowing the model to be fine-tuned in the future
+or replaced with an open-source model, like [Llama](https://ai.meta.com/llama/), if an on-premise solution is needed.
+
+
+## Performance Metrics
+
+## Results
 
 
