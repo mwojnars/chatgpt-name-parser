@@ -102,8 +102,14 @@ C. **Entity-level Label Match Accuracy** (function `calc_equal_labels_in_line`) 
    contribute more to the metric, unlike the previous metrics, which are calculated on a per-sample basis
    and treat each sample - whether short or long - equally.
 
-It should be noted that ChatGPT occasionally changes - these can easily be fixed by additional post-processing,
-that's why ....
+It should be noted that ChatGPT occasionally changes the raw text of the input names, e.g.,
+by adding missing dots after prefixes or initials. If this behavior is undesired, the output can be easily fixed
+by additional post-processing - not included in the current version of the parser. The metrics B and C only 
+compare the entities' labels and not their contents,
+which makes them more robust to this type of occasional alterations in the raw text.
+
+The metric C is treated as the primary one, because - unlike the other two - it counts accuracy 
+on a per-entity, rather than per-sample, basis.
 
 
 ## Results
