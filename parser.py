@@ -170,7 +170,6 @@ def main():
         # print(f'{p:120}  |  {t}')
         
     # print metrics...
-    # how many lines in the output are strictly equal to the target, printed as percentage
     print('\n\nMetrics:')
     print(f'no. of identical lines:                  {calc_equal_lines(true, pred):.1%}')
     print(f'no. of lines with all identical labels:  {calc_equal_all_labels_in_line(true, pred):.1%}')
