@@ -17,7 +17,7 @@ import openai
 import random
 from itertools import zip_longest
 
-from data import load_data, count_labels, print_labels, split_data, select_examples, exclude_examples, write_to_excel
+from data import load_data, get_labels, count_labels, print_labels, select_examples, exclude_examples, write_to_excel
 from metrics import calc_equal_lines, calc_equal_labels_in_line, calc_equal_all_labels_in_line
 from mocks import mock_001
 
@@ -26,9 +26,10 @@ PROMPT = \
 """
 You are a Named Entity Recognition (NER) tool that takes person names on input and adds XML annotations for
 different parts of the name: given name, surname, initials etc. You are allowed to use the following entities:
-GivenName, Surname, MiddleName, FirstInitial, MiddleInitial, LastInitial, Nickname, PrefixMarital, PrefixOther,
+GivenName, MiddleName, Surname, FirstInitial, MiddleInitial, LastInitial, Nickname, PrefixMarital, PrefixOther,
 SuffixGenerational, SuffixOther, And.
-Every sequence of 1+ non-whitespace characters must be annotated with an entity. Example output:
+
+Every subsequence of 1+ non-whitespace characters in a line must be annotated with an entity. Example output:
 
 {examples}
 
@@ -38,7 +39,8 @@ a single-word name may very well represent a surname rather than a given name;
 name prefixes and suffixes can be added for marital status, generation, education, profession etc.;
 initials and nicknames can be used instead, or in addition to, given names and surnames;
 "&" and "and" entities can be used to join multiple names (given names, surnames) on a single line;
-"Mr" should be treated as PrefixMarital not Other.
+"Mr" should be treated as PrefixMarital not Other;
+an input word should NEVER be converted to a label: "Smith" to <Smith/> or "J" to <J/> is INCORRECT!
 
 Now, when you understand the rules, parse the following list of raw names and output corresponding annotations.
 Do NOT output anything else: no description, no line numbers, no bullet points. Do NOT insert any extra
@@ -46,6 +48,11 @@ characters to the raw text inside annotations, nor change existing raw character
 
 {names}
 """
+
+
+# list of all entities that can be used in the output, for validation checks
+ENTITIES = ("GivenName MiddleName Surname FirstInitial MiddleInitial LastInitial Nickname PrefixMarital PrefixOther "
+            "SuffixGenerational SuffixOther And").split()
 
 
 def build_prompt(examples, names_annotated):
@@ -91,7 +98,7 @@ def parse_names_once(examples, names):
     return list(filter(None, [line.strip() for line in output_lines]))
     
     
-def parse_names_all(examples, names, batch_size=30):
+def parse_names_all(examples, names, batch_size=50, max_retry=10):
     """
     Parse a (large) set of names in multiple calls to OpenAI API. Merge the results.
     """
@@ -103,8 +110,8 @@ def parse_names_all(examples, names, batch_size=30):
         pred = []
         
         retry = 0
-        while len(pred) != len(batch):                      # retry max 5 times if the output looks incomplete/incorrect
-            if retry > 5: break
+        while len(pred) != len(batch) or wrong_syntax(pred):        # retry if the output looks incomplete/incorrect
+            if retry > max_retry: break
             if retry > 0: print(f'\nRetrying ({retry})...')
             
             try:
@@ -130,9 +137,29 @@ def parse_names_all(examples, names, batch_size=30):
     return output
     
     
+def wrong_syntax(pred, threshold=0.1):
+    """
+    Return True if 20% or more samples in the ChatGPT output have incorrect syntax: no XML tags
+    or the tags have wrong names.
+    """
+    labels = [get_labels(line) for line in pred]                # list of labels in each line
+    
+    # count samples with no XML tags
+    no_tags = sum(1 for lbl in labels if not lbl)
+    
+    # count samples with wrong XML tags (other than the ones in ENTITIES)
+    wrong_tags = sum(1 for lbl in labels if lbl and not all(tag in ENTITIES for tag in lbl))
+    
+    if no_tags + wrong_tags >= threshold * len(pred):
+        print(f'\n\nWARNING: {no_tags} outputs with no proper XML tags, {wrong_tags} outputs with wrong XML tags')
+        return True
+    
+    return False
+    
+    
 ########################################################################################################################
 
-EXPERIMENT = '012_full'
+EXPERIMENT = '014'
 
 
 def main():
@@ -155,8 +182,7 @@ def main():
     
     true, pred, _ = mock_001()
     
-    # true = test[::10]
-    true = test
+    true = test[::10]
     pred = parse_names_all(examples, true)
     
     write_to_excel(true, pred, f'../experiments/out_{EXPERIMENT}.xlsx')
