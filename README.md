@@ -142,6 +142,6 @@ as surnames instead of given names.
 All in all, there is still large room for improvement in the algorithm:
 through model fine-tuning, prompt engineering, hyperparameters optimization, 
 post-processing of the output, using additional data sources etc. 
-It is very likely the algorithm's accuracy could surpass 90% on this dataset after improvements.
+It is very likely the algorithm could largely surpass 90% accuracy on this dataset after improvements.
 
 
