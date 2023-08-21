@@ -1,0 +1,2284 @@
+Parsing batch starting at 0...
+
+Prompt (5822 characters, approx. 1940 tokens):
+
+You are a Named Entity Recognition (NER) tool that takes person names on input and adds XML annotations for
+different parts of the name: given name, surname, initials etc. You are allowed to use the following entities:
+GivenName, MiddleName, Surname, FirstInitial, MiddleInitial, LastInitial, Nickname, PrefixMarital, PrefixOther,
+SuffixGenerational, SuffixOther, And.
+Every subsequence of 1+ non-whitespace characters in a line must be annotated with an entity from the above list.
+Example output:
+
+<FirstInitial>A.</FirstInitial> <MiddleName>Richard</MiddleName> <Surname>Royal</Surname>
+<FirstInitial>C.R.</FirstInitial> <Surname>Ramakrishnan</Surname>
+<FirstInitial>R.</FirstInitial> <Surname>Sekar</Surname>
+<FirstInitial>W.</FirstInitial> <MiddleName>Bruce</MiddleName> <Surname>Croft</Surname>
+<GivenName>Arthur</GivenName> <Surname>Gray,</Surname> <SuffixGenerational>Jr.,</SuffixGenerational> <SuffixOther>M.D.</SuffixOther>
+<GivenName>Brandon</GivenName> <LastInitial>R.</LastInitial>
+<GivenName>Chenyang</GivenName> <LastInitial>Lu</LastInitial>
+<GivenName>Earl</GivenName> <Nickname>"The</Nickname> <Nickname>Goat"</Nickname> <Surname>Manigault</Surname>
+<GivenName>Elaheh</GivenName> <Nickname>(Eli)</Nickname> <Surname>Bozorgzadeh</Surname>
+<GivenName>Elizabeth</GivenName> <LastInitial>B</LastInitial>
+<GivenName>Florence</GivenName> <MiddleName>Carsley</MiddleName> <Surname>Barnett,</Surname> <SuffixOther>MD</SuffixOther>
+<GivenName>James</GivenName> <Nickname>"Mike"</Nickname> <Surname>Dyer</Surname> <SuffixGenerational>Sr.</SuffixGenerational>
+<GivenName>Mukesh</GivenName> <Nickname>"Tommy"</Nickname> <Surname>Patel</Surname>
+<GivenName>REYES</GivenName>
+<GivenName>SVITLANA</GivenName> <MiddleInitial>J</MiddleInitial> <Surname>MANDZY</Surname>
+<GivenName>Sarita</GivenName> <MiddleInitial>V.</MiddleInitial> <Surname>Adve</Surname>
+<GivenName>Tracy</GivenName> <Nickname>"T-Mac"</Nickname> <Surname>McGrady</Surname>
+<GivenName>bill</GivenName> <And>7</And> <GivenName>bev</GivenName> <Surname>campion</Surname>
+<GivenName>carlton</GivenName> <MiddleInitial>r</MiddleInitial> <Surname>marcyan,</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>chris</GivenName> <And>and</And> <GivenName>Jaydee</GivenName> <Surname>Smith</Surname>
+<GivenName>demetrios</GivenName> <Surname>stavrianos,</Surname>
+<GivenName>harry</GivenName> <MiddleName>c</MiddleName> <Surname>piper</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>joseph</GivenName> <And>&</And> <GivenName>golnar</GivenName> <Surname>phillips</Surname>
+<GivenName>ray</GivenName> <LastInitial>p</LastInitial>
+<LastInitial>S,</LastInitial> <GivenName>Kim</GivenName>
+<PrefixMarital>Miss</PrefixMarital> <GivenName>MARIETTA</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>ABALOS</Surname> <Surname>GALITO</Surname>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>George</GivenName> <MiddleInitial>W.</MiddleInitial> <Surname>Walker,</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>Max</GivenName> <Surname>McGlamry</Surname>
+<PrefixMarital>Mrs.</PrefixMarital> <GivenName>Larry</GivenName> <Surname>Bessinger</Surname>
+<PrefixMarital>Ms.</PrefixMarital> <GivenName>Carolyn</GivenName> <Surname>Davenport</Surname>
+<PrefixOther>Dr.</PrefixOther> <GivenName>George</GivenName> <Surname>Snelling</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <GivenName>Hugh</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>smisson</Surname> <SuffixGenerational>Jr.</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <Surname>Gomes</Surname> <And>&</And> <PrefixOther>Dr.</PrefixOther> <Surname>Lui</Surname>
+<PrefixOther>State</PrefixOther> <PrefixOther>Senator</PrefixOther> <GivenName>Kwame</GivenName> <Surname>Raoul</Surname>
+<PrefixOther>father</PrefixOther> <GivenName>michael</GivenName> <Surname>pfleger</Surname>
+<Surname>COOPER</Surname>
+<Surname>HARPOOL,</Surname> <FirstInitial>M.</FirstInitial> <MiddleName>DOUGLAS</MiddleName>
+<Surname>KING,</Surname> <GivenName>JO</GivenName> <GivenName>ANN</GivenName> <And>and</And> <GivenName>DAVID</GivenName>
+<Surname>Russell,</Surname> <GivenName>Herman</GivenName>
+<Surname>TROJAN,</Surname> <SuffixOther>BSN,</SuffixOther> <SuffixOther>RN,</SuffixOther> <SuffixOther>LNCC,</SuffixOther> <GivenName>CHRISTINE</GivenName>
+
+Observe that entities only include non-space characters and can only start and end on whitespace;
+comma "," can be used to reverse the order of given name vs surname;
+a single-word name may very well represent a surname rather than a given name;
+name prefixes and suffixes can be added for marital status, generation, education, profession etc.;
+initials and nicknames can be used instead, or in addition to, given names and surnames;
+"&" and "and" entities can be used to join multiple names (given names, surnames) on a single line;
+"Mr" should be treated as PrefixMarital not Other.
+
+Now, when you understand the rules, parse the following list of raw names and output corresponding annotations.
+Do NOT output anything else: no description, no line numbers, no bullet points. Do NOT insert any extra
+characters to the raw text inside annotations, nor change existing raw characters. Input names:
+
+Larry "Mr. Mean" Smith
+KIA
+MERIDETH
+BARRETT
+Le Song
+Xiaohui (Helen) Gu
+Robert P Dick
+Mrs. Virginia B. Tate
+Yejin Choi
+STEPHEN H DYSON
+MARKS
+Joseph DePew
+David M Lahasky, MD
+MEHRZAD SERAJI
+FLORES
+CLEMENTE
+EDGARDO
+ACEVEDO
+REED
+DORTHEY
+BRETT
+ERWIN
+WHITE
+Peter Stone
+Ninghui Li
+ARMSTRONG
+Victoria Lynn Clements, D.O.
+Christine Neuwirth
+PACE
+LARAE
+
+
+
+Output:
+<GivenName>Larry</GivenName> <Nickname>"Mr. Mean"</Nickname> <Surname>Smith</Surname>
+<GivenName>KIA</GivenName>
+<GivenName>MERIDETH</GivenName>
+<GivenName>BARRETT</GivenName>
+<GivenName>Le</GivenName> <Surname>Song</Surname>
+<GivenName>Xiaohui</GivenName> <Nickname>(Helen)</Nickname> <Surname>Gu</Surname>
+<GivenName>Robert</GivenName> <MiddleInitial>P</MiddleInitial> <Surname>Dick</Surname>
+<PrefixMarital>Mrs.</PrefixMarital> <GivenName>Virginia</GivenName> <MiddleInitial>B.</MiddleInitial> <Surname>Tate</Surname>
+<GivenName>Yejin</GivenName> <Surname>Choi</Surname>
+<GivenName>STEPHEN</GivenName> <MiddleInitial>H</MiddleInitial> <Surname>DYSON</Surname>
+<GivenName>MARKS</GivenName>
+<GivenName>Joseph</GivenName> <Surname>DePew</Surname>
+<GivenName>David</GivenName> <MiddleInitial>M</MiddleInitial> <Surname>Lahasky,</Surname> <SuffixOther>MD</SuffixOther>
+<GivenName>MEHRZAD</GivenName> <Surname>SERAJI</Surname>
+<GivenName>FLORES</GivenName>
+<GivenName>CLEMENTE</GivenName>
+<GivenName>EDGARDO</GivenName>
+<GivenName>ACEVEDO</GivenName>
+<GivenName>REED</GivenName>
+<GivenName>DORTHEY</GivenName>
+<GivenName>BRETT</GivenName>
+<GivenName>ERWIN</GivenName>
+<GivenName>WHITE</GivenName>
+<GivenName>Peter</GivenName> <Surname>Stone</Surname>
+<GivenName>Ninghui</GivenName> <Surname>Li</Surname>
+<GivenName>ARMSTRONG</GivenName>
+<GivenName>Victoria</GivenName> <MiddleName>Lynn</MiddleName> <Surname>Clements,</Surname> <SuffixOther>D.O.</SuffixOther>
+<GivenName>Christine</GivenName> <Surname>Neuwirth</Surname>
+<GivenName>PACE</GivenName>
+<GivenName>LARAE</GivenName>
+
+
+Time elapsed: 8.88 seconds
+
+Parsing batch starting at 30...
+
+Prompt (5888 characters, approx. 1962 tokens):
+
+You are a Named Entity Recognition (NER) tool that takes person names on input and adds XML annotations for
+different parts of the name: given name, surname, initials etc. You are allowed to use the following entities:
+GivenName, MiddleName, Surname, FirstInitial, MiddleInitial, LastInitial, Nickname, PrefixMarital, PrefixOther,
+SuffixGenerational, SuffixOther, And.
+Every subsequence of 1+ non-whitespace characters in a line must be annotated with an entity from the above list.
+Example output:
+
+<FirstInitial>A.</FirstInitial> <MiddleName>Richard</MiddleName> <Surname>Royal</Surname>
+<FirstInitial>C.R.</FirstInitial> <Surname>Ramakrishnan</Surname>
+<FirstInitial>R.</FirstInitial> <Surname>Sekar</Surname>
+<FirstInitial>W.</FirstInitial> <MiddleName>Bruce</MiddleName> <Surname>Croft</Surname>
+<GivenName>Arthur</GivenName> <Surname>Gray,</Surname> <SuffixGenerational>Jr.,</SuffixGenerational> <SuffixOther>M.D.</SuffixOther>
+<GivenName>Brandon</GivenName> <LastInitial>R.</LastInitial>
+<GivenName>Chenyang</GivenName> <LastInitial>Lu</LastInitial>
+<GivenName>Earl</GivenName> <Nickname>"The</Nickname> <Nickname>Goat"</Nickname> <Surname>Manigault</Surname>
+<GivenName>Elaheh</GivenName> <Nickname>(Eli)</Nickname> <Surname>Bozorgzadeh</Surname>
+<GivenName>Elizabeth</GivenName> <LastInitial>B</LastInitial>
+<GivenName>Florence</GivenName> <MiddleName>Carsley</MiddleName> <Surname>Barnett,</Surname> <SuffixOther>MD</SuffixOther>
+<GivenName>James</GivenName> <Nickname>"Mike"</Nickname> <Surname>Dyer</Surname> <SuffixGenerational>Sr.</SuffixGenerational>
+<GivenName>Mukesh</GivenName> <Nickname>"Tommy"</Nickname> <Surname>Patel</Surname>
+<GivenName>REYES</GivenName>
+<GivenName>SVITLANA</GivenName> <MiddleInitial>J</MiddleInitial> <Surname>MANDZY</Surname>
+<GivenName>Sarita</GivenName> <MiddleInitial>V.</MiddleInitial> <Surname>Adve</Surname>
+<GivenName>Tracy</GivenName> <Nickname>"T-Mac"</Nickname> <Surname>McGrady</Surname>
+<GivenName>bill</GivenName> <And>7</And> <GivenName>bev</GivenName> <Surname>campion</Surname>
+<GivenName>carlton</GivenName> <MiddleInitial>r</MiddleInitial> <Surname>marcyan,</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>chris</GivenName> <And>and</And> <GivenName>Jaydee</GivenName> <Surname>Smith</Surname>
+<GivenName>demetrios</GivenName> <Surname>stavrianos,</Surname>
+<GivenName>harry</GivenName> <MiddleName>c</MiddleName> <Surname>piper</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>joseph</GivenName> <And>&</And> <GivenName>golnar</GivenName> <Surname>phillips</Surname>
+<GivenName>ray</GivenName> <LastInitial>p</LastInitial>
+<LastInitial>S,</LastInitial> <GivenName>Kim</GivenName>
+<PrefixMarital>Miss</PrefixMarital> <GivenName>MARIETTA</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>ABALOS</Surname> <Surname>GALITO</Surname>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>George</GivenName> <MiddleInitial>W.</MiddleInitial> <Surname>Walker,</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>Max</GivenName> <Surname>McGlamry</Surname>
+<PrefixMarital>Mrs.</PrefixMarital> <GivenName>Larry</GivenName> <Surname>Bessinger</Surname>
+<PrefixMarital>Ms.</PrefixMarital> <GivenName>Carolyn</GivenName> <Surname>Davenport</Surname>
+<PrefixOther>Dr.</PrefixOther> <GivenName>George</GivenName> <Surname>Snelling</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <GivenName>Hugh</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>smisson</Surname> <SuffixGenerational>Jr.</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <Surname>Gomes</Surname> <And>&</And> <PrefixOther>Dr.</PrefixOther> <Surname>Lui</Surname>
+<PrefixOther>State</PrefixOther> <PrefixOther>Senator</PrefixOther> <GivenName>Kwame</GivenName> <Surname>Raoul</Surname>
+<PrefixOther>father</PrefixOther> <GivenName>michael</GivenName> <Surname>pfleger</Surname>
+<Surname>COOPER</Surname>
+<Surname>HARPOOL,</Surname> <FirstInitial>M.</FirstInitial> <MiddleName>DOUGLAS</MiddleName>
+<Surname>KING,</Surname> <GivenName>JO</GivenName> <GivenName>ANN</GivenName> <And>and</And> <GivenName>DAVID</GivenName>
+<Surname>Russell,</Surname> <GivenName>Herman</GivenName>
+<Surname>TROJAN,</Surname> <SuffixOther>BSN,</SuffixOther> <SuffixOther>RN,</SuffixOther> <SuffixOther>LNCC,</SuffixOther> <GivenName>CHRISTINE</GivenName>
+
+Observe that entities only include non-space characters and can only start and end on whitespace;
+comma "," can be used to reverse the order of given name vs surname;
+a single-word name may very well represent a surname rather than a given name;
+name prefixes and suffixes can be added for marital status, generation, education, profession etc.;
+initials and nicknames can be used instead, or in addition to, given names and surnames;
+"&" and "and" entities can be used to join multiple names (given names, surnames) on a single line;
+"Mr" should be treated as PrefixMarital not Other.
+
+Now, when you understand the rules, parse the following list of raw names and output corresponding annotations.
+Do NOT output anything else: no description, no line numbers, no bullet points. Do NOT insert any extra
+characters to the raw text inside annotations, nor change existing raw characters. Input names:
+
+Mr. and Mrs. Marc Olivie
+Michael J. Cafarella
+Mr James O Davis
+PUENTE KILLIAN, CHRISTINE E
+Melody Jackson
+Paul Chialdikas
+j louise dietzen
+Dr. and Mrs. BINNO DHAR M.D.
+KATHERN
+LLOYD
+QUINN, KEVIN R
+Liqing Zhang
+John Zahorjan
+DURAN
+BURMA
+Curtis Martin II
+Mark O. Bernardy
+Martin Stein
+GLASS
+QUEEN
+BRUCE D WARDINSKI
+PENA
+Honglak Lee
+Michelle Terrette
+BRITT
+GRACE
+MC DERMOTT, KEITH J
+CHASE
+C. D. Glin
+Koray Aydin
+
+
+
+Output:
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>Marc</GivenName> <Surname>Olivie</Surname>
+<GivenName>Michael</GivenName> <MiddleInitial>J</MiddleInitial> <Surname>Cafarella</Surname>
+<PrefixMarital>Mr.</PrefixMarital> <GivenName>James</GivenName> <MiddleInitial>O</MiddleInitial> <Surname>Davis</Surname>
+<GivenName>PUENTE</GivenName> <Surname>KILLIAN,</Surname> <GivenName>CHRISTINE</GivenName> <MiddleInitial>E</MiddleInitial>
+<GivenName>Melody</GivenName> <Surname>Jackson</Surname>
+<GivenName>Paul</GivenName> <Surname>Chialdikas</Surname>
+<GivenName>j</GivenName> <MiddleName>louise</MiddleName> <Surname>dietzen</Surname>
+<PrefixOther>Dr.</PrefixOther> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>BINNO</GivenName> <Surname>DHAR</Surname> <SuffixOther>M.D.</SuffixOther>
+<GivenName>KATHERN</GivenName>
+<GivenName>LLOYD</GivenName>
+<Surname>QUINN,</Surname> <GivenName>KEVIN</GivenName> <MiddleInitial>R</MiddleInitial>
+<GivenName>Liqing</GivenName> <Surname>Zhang</Surname>
+<GivenName>John</GivenName> <Surname>Zahorjan</Surname>
+<GivenName>DURAN</GivenName>
+<GivenName>BURMA</GivenName>
+<GivenName>Curtis</GivenName> <Surname>Martin</Surname> <SuffixGenerational>II</SuffixGenerational>
+<GivenName>Mark</GivenName> <MiddleInitial>O.</MiddleInitial> <Surname>Bernardy</Surname>
+<GivenName>Martin</GivenName> <Surname>Stein</Surname>
+<Surname>GLASS</Surname>
+<Surname>QUEEN</Surname>
+<GivenName>BRUCE</GivenName> <MiddleInitial>D</MiddleInitial> <Surname>WARDINSKI</Surname>
+<GivenName>PENA</GivenName>
+<GivenName>Honglak</GivenName> <Surname>Lee</Surname>
+<GivenName>Michelle</GivenName> <Surname>Terrette</Surname>
+<GivenName>BRITT</GivenName>
+<GivenName>GRACE</GivenName>
+<GivenName>MC</GivenName> <MiddleInitial>DERMOTT,</MiddleInitial> <GivenName>KEITH</GivenName> <MiddleInitial>J</MiddleInitial>
+<GivenName>CHASE</GivenName>
+<GivenName>C.</GivenName> <MiddleInitial>D.</MiddleInitial> <Surname>Glin</Surname>
+<GivenName>Koray</GivenName> <Surname>Aydin</Surname>
+
+
+Time elapsed: 11.16 seconds
+
+Parsing batch starting at 60...
+
+Prompt (5835 characters, approx. 1945 tokens):
+
+You are a Named Entity Recognition (NER) tool that takes person names on input and adds XML annotations for
+different parts of the name: given name, surname, initials etc. You are allowed to use the following entities:
+GivenName, MiddleName, Surname, FirstInitial, MiddleInitial, LastInitial, Nickname, PrefixMarital, PrefixOther,
+SuffixGenerational, SuffixOther, And.
+Every subsequence of 1+ non-whitespace characters in a line must be annotated with an entity from the above list.
+Example output:
+
+<FirstInitial>A.</FirstInitial> <MiddleName>Richard</MiddleName> <Surname>Royal</Surname>
+<FirstInitial>C.R.</FirstInitial> <Surname>Ramakrishnan</Surname>
+<FirstInitial>R.</FirstInitial> <Surname>Sekar</Surname>
+<FirstInitial>W.</FirstInitial> <MiddleName>Bruce</MiddleName> <Surname>Croft</Surname>
+<GivenName>Arthur</GivenName> <Surname>Gray,</Surname> <SuffixGenerational>Jr.,</SuffixGenerational> <SuffixOther>M.D.</SuffixOther>
+<GivenName>Brandon</GivenName> <LastInitial>R.</LastInitial>
+<GivenName>Chenyang</GivenName> <LastInitial>Lu</LastInitial>
+<GivenName>Earl</GivenName> <Nickname>"The</Nickname> <Nickname>Goat"</Nickname> <Surname>Manigault</Surname>
+<GivenName>Elaheh</GivenName> <Nickname>(Eli)</Nickname> <Surname>Bozorgzadeh</Surname>
+<GivenName>Elizabeth</GivenName> <LastInitial>B</LastInitial>
+<GivenName>Florence</GivenName> <MiddleName>Carsley</MiddleName> <Surname>Barnett,</Surname> <SuffixOther>MD</SuffixOther>
+<GivenName>James</GivenName> <Nickname>"Mike"</Nickname> <Surname>Dyer</Surname> <SuffixGenerational>Sr.</SuffixGenerational>
+<GivenName>Mukesh</GivenName> <Nickname>"Tommy"</Nickname> <Surname>Patel</Surname>
+<GivenName>REYES</GivenName>
+<GivenName>SVITLANA</GivenName> <MiddleInitial>J</MiddleInitial> <Surname>MANDZY</Surname>
+<GivenName>Sarita</GivenName> <MiddleInitial>V.</MiddleInitial> <Surname>Adve</Surname>
+<GivenName>Tracy</GivenName> <Nickname>"T-Mac"</Nickname> <Surname>McGrady</Surname>
+<GivenName>bill</GivenName> <And>7</And> <GivenName>bev</GivenName> <Surname>campion</Surname>
+<GivenName>carlton</GivenName> <MiddleInitial>r</MiddleInitial> <Surname>marcyan,</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>chris</GivenName> <And>and</And> <GivenName>Jaydee</GivenName> <Surname>Smith</Surname>
+<GivenName>demetrios</GivenName> <Surname>stavrianos,</Surname>
+<GivenName>harry</GivenName> <MiddleName>c</MiddleName> <Surname>piper</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>joseph</GivenName> <And>&</And> <GivenName>golnar</GivenName> <Surname>phillips</Surname>
+<GivenName>ray</GivenName> <LastInitial>p</LastInitial>
+<LastInitial>S,</LastInitial> <GivenName>Kim</GivenName>
+<PrefixMarital>Miss</PrefixMarital> <GivenName>MARIETTA</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>ABALOS</Surname> <Surname>GALITO</Surname>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>George</GivenName> <MiddleInitial>W.</MiddleInitial> <Surname>Walker,</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>Max</GivenName> <Surname>McGlamry</Surname>
+<PrefixMarital>Mrs.</PrefixMarital> <GivenName>Larry</GivenName> <Surname>Bessinger</Surname>
+<PrefixMarital>Ms.</PrefixMarital> <GivenName>Carolyn</GivenName> <Surname>Davenport</Surname>
+<PrefixOther>Dr.</PrefixOther> <GivenName>George</GivenName> <Surname>Snelling</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <GivenName>Hugh</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>smisson</Surname> <SuffixGenerational>Jr.</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <Surname>Gomes</Surname> <And>&</And> <PrefixOther>Dr.</PrefixOther> <Surname>Lui</Surname>
+<PrefixOther>State</PrefixOther> <PrefixOther>Senator</PrefixOther> <GivenName>Kwame</GivenName> <Surname>Raoul</Surname>
+<PrefixOther>father</PrefixOther> <GivenName>michael</GivenName> <Surname>pfleger</Surname>
+<Surname>COOPER</Surname>
+<Surname>HARPOOL,</Surname> <FirstInitial>M.</FirstInitial> <MiddleName>DOUGLAS</MiddleName>
+<Surname>KING,</Surname> <GivenName>JO</GivenName> <GivenName>ANN</GivenName> <And>and</And> <GivenName>DAVID</GivenName>
+<Surname>Russell,</Surname> <GivenName>Herman</GivenName>
+<Surname>TROJAN,</Surname> <SuffixOther>BSN,</SuffixOther> <SuffixOther>RN,</SuffixOther> <SuffixOther>LNCC,</SuffixOther> <GivenName>CHRISTINE</GivenName>
+
+Observe that entities only include non-space characters and can only start and end on whitespace;
+comma "," can be used to reverse the order of given name vs surname;
+a single-word name may very well represent a surname rather than a given name;
+name prefixes and suffixes can be added for marital status, generation, education, profession etc.;
+initials and nicknames can be used instead, or in addition to, given names and surnames;
+"&" and "and" entities can be used to join multiple names (given names, surnames) on a single line;
+"Mr" should be treated as PrefixMarital not Other.
+
+Now, when you understand the rules, parse the following list of raw names and output corresponding annotations.
+Do NOT output anything else: no description, no line numbers, no bullet points. Do NOT insert any extra
+characters to the raw text inside annotations, nor change existing raw characters. Input names:
+
+WARREN
+KLINE
+SIMS
+HEATH
+David O. Woodruff
+John Rex Fuqua
+MOORE
+Wim van Dam
+John Smith, II
+EASTER
+James R. Lee
+Jianxiong Xiao
+Hector Corrada Bravo
+Jason Hong
+KIZZY
+Charles and jean dukes
+Rev John Piper
+Jeffrey Bigham
+john puthesseril
+BOK
+TOSHIKO
+ORTEGA
+EDWARD JAY POLLYEA
+STEELE
+FRANK W. ROGERS, JR.
+GLADYS
+CAROLYNN
+KRAUSE
+Swastik Kopparty
+Madelyn Van Dyke
+
+
+
+Output:
+<GivenName>WARREN</GivenName>
+<GivenName>KLINE</GivenName>
+<GivenName>SIMS</GivenName>
+<GivenName>HEATH</GivenName>
+<GivenName>David</GivenName> <MiddleInitial>O.</MiddleInitial> <Surname>Woodruff</Surname>
+<GivenName>John</GivenName> <MiddleName>Rex</MiddleName> <Surname>Fuqua</Surname>
+<GivenName>MOORE</GivenName>
+<GivenName>Wim</GivenName> <Surname>van</Surname> <Surname>Dam</Surname>
+<GivenName>John</GivenName> <Surname>Smith,</Surname> <SuffixGenerational>II</SuffixGenerational>
+<GivenName>EASTER</GivenName>
+<GivenName>James</GivenName> <MiddleInitial>R.</MiddleInitial> <Surname>Lee</Surname>
+<GivenName>Jianxiong</GivenName> <Surname>Xiao</Surname>
+<GivenName>Hector</GivenName> <Surname>Corrada</Surname> <Surname>Bravo</Surname>
+<GivenName>Jason</GivenName> <Surname>Hong</Surname>
+<GivenName>KIZZY</GivenName>
+<GivenName>Charles</GivenName> <And>and</And> <GivenName>jean</GivenName> <Surname>dukes</Surname>
+<PrefixOther>Rev</PrefixOther> <GivenName>John</GivenName> <Surname>Piper</Surname>
+<GivenName>Jeffrey</GivenName> <Surname>Bigham</Surname>
+<GivenName>john</GivenName> <Surname>puthesseril</Surname>
+<GivenName>BOK</GivenName>
+<GivenName>TOSHIKO</GivenName>
+<GivenName>ORTEGA</GivenName>
+<GivenName>EDWARD</GivenName> <MiddleInitial>JAY</MiddleInitial> <Surname>POLLYEA</Surname>
+<GivenName>STEELE</GivenName>
+<GivenName>FRANK</GivenName> <MiddleInitial>W.</MiddleInitial> <Surname>ROGERS,</Surname> <SuffixGenerational>JR.</SuffixGenerational>
+<GivenName>GLADYS</GivenName>
+<GivenName>CAROLYNN</GivenName>
+<GivenName>KRAUSE</GivenName>
+<GivenName>Swastik</GivenName> <Surname>Kopparty</Surname>
+<GivenName>Madelyn</GivenName> <Surname>Van</Surname> <Surname>Dyke</Surname>
+
+
+Time elapsed: 8.40 seconds
+
+Parsing batch starting at 90...
+
+Prompt (5842 characters, approx. 1947 tokens):
+
+You are a Named Entity Recognition (NER) tool that takes person names on input and adds XML annotations for
+different parts of the name: given name, surname, initials etc. You are allowed to use the following entities:
+GivenName, MiddleName, Surname, FirstInitial, MiddleInitial, LastInitial, Nickname, PrefixMarital, PrefixOther,
+SuffixGenerational, SuffixOther, And.
+Every subsequence of 1+ non-whitespace characters in a line must be annotated with an entity from the above list.
+Example output:
+
+<FirstInitial>A.</FirstInitial> <MiddleName>Richard</MiddleName> <Surname>Royal</Surname>
+<FirstInitial>C.R.</FirstInitial> <Surname>Ramakrishnan</Surname>
+<FirstInitial>R.</FirstInitial> <Surname>Sekar</Surname>
+<FirstInitial>W.</FirstInitial> <MiddleName>Bruce</MiddleName> <Surname>Croft</Surname>
+<GivenName>Arthur</GivenName> <Surname>Gray,</Surname> <SuffixGenerational>Jr.,</SuffixGenerational> <SuffixOther>M.D.</SuffixOther>
+<GivenName>Brandon</GivenName> <LastInitial>R.</LastInitial>
+<GivenName>Chenyang</GivenName> <LastInitial>Lu</LastInitial>
+<GivenName>Earl</GivenName> <Nickname>"The</Nickname> <Nickname>Goat"</Nickname> <Surname>Manigault</Surname>
+<GivenName>Elaheh</GivenName> <Nickname>(Eli)</Nickname> <Surname>Bozorgzadeh</Surname>
+<GivenName>Elizabeth</GivenName> <LastInitial>B</LastInitial>
+<GivenName>Florence</GivenName> <MiddleName>Carsley</MiddleName> <Surname>Barnett,</Surname> <SuffixOther>MD</SuffixOther>
+<GivenName>James</GivenName> <Nickname>"Mike"</Nickname> <Surname>Dyer</Surname> <SuffixGenerational>Sr.</SuffixGenerational>
+<GivenName>Mukesh</GivenName> <Nickname>"Tommy"</Nickname> <Surname>Patel</Surname>
+<GivenName>REYES</GivenName>
+<GivenName>SVITLANA</GivenName> <MiddleInitial>J</MiddleInitial> <Surname>MANDZY</Surname>
+<GivenName>Sarita</GivenName> <MiddleInitial>V.</MiddleInitial> <Surname>Adve</Surname>
+<GivenName>Tracy</GivenName> <Nickname>"T-Mac"</Nickname> <Surname>McGrady</Surname>
+<GivenName>bill</GivenName> <And>7</And> <GivenName>bev</GivenName> <Surname>campion</Surname>
+<GivenName>carlton</GivenName> <MiddleInitial>r</MiddleInitial> <Surname>marcyan,</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>chris</GivenName> <And>and</And> <GivenName>Jaydee</GivenName> <Surname>Smith</Surname>
+<GivenName>demetrios</GivenName> <Surname>stavrianos,</Surname>
+<GivenName>harry</GivenName> <MiddleName>c</MiddleName> <Surname>piper</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>joseph</GivenName> <And>&</And> <GivenName>golnar</GivenName> <Surname>phillips</Surname>
+<GivenName>ray</GivenName> <LastInitial>p</LastInitial>
+<LastInitial>S,</LastInitial> <GivenName>Kim</GivenName>
+<PrefixMarital>Miss</PrefixMarital> <GivenName>MARIETTA</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>ABALOS</Surname> <Surname>GALITO</Surname>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>George</GivenName> <MiddleInitial>W.</MiddleInitial> <Surname>Walker,</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>Max</GivenName> <Surname>McGlamry</Surname>
+<PrefixMarital>Mrs.</PrefixMarital> <GivenName>Larry</GivenName> <Surname>Bessinger</Surname>
+<PrefixMarital>Ms.</PrefixMarital> <GivenName>Carolyn</GivenName> <Surname>Davenport</Surname>
+<PrefixOther>Dr.</PrefixOther> <GivenName>George</GivenName> <Surname>Snelling</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <GivenName>Hugh</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>smisson</Surname> <SuffixGenerational>Jr.</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <Surname>Gomes</Surname> <And>&</And> <PrefixOther>Dr.</PrefixOther> <Surname>Lui</Surname>
+<PrefixOther>State</PrefixOther> <PrefixOther>Senator</PrefixOther> <GivenName>Kwame</GivenName> <Surname>Raoul</Surname>
+<PrefixOther>father</PrefixOther> <GivenName>michael</GivenName> <Surname>pfleger</Surname>
+<Surname>COOPER</Surname>
+<Surname>HARPOOL,</Surname> <FirstInitial>M.</FirstInitial> <MiddleName>DOUGLAS</MiddleName>
+<Surname>KING,</Surname> <GivenName>JO</GivenName> <GivenName>ANN</GivenName> <And>and</And> <GivenName>DAVID</GivenName>
+<Surname>Russell,</Surname> <GivenName>Herman</GivenName>
+<Surname>TROJAN,</Surname> <SuffixOther>BSN,</SuffixOther> <SuffixOther>RN,</SuffixOther> <SuffixOther>LNCC,</SuffixOther> <GivenName>CHRISTINE</GivenName>
+
+Observe that entities only include non-space characters and can only start and end on whitespace;
+comma "," can be used to reverse the order of given name vs surname;
+a single-word name may very well represent a surname rather than a given name;
+name prefixes and suffixes can be added for marital status, generation, education, profession etc.;
+initials and nicknames can be used instead, or in addition to, given names and surnames;
+"&" and "and" entities can be used to join multiple names (given names, surnames) on a single line;
+"Mr" should be treated as PrefixMarital not Other.
+
+Now, when you understand the rules, parse the following list of raw names and output corresponding annotations.
+Do NOT output anything else: no description, no line numbers, no bullet points. Do NOT insert any extra
+characters to the raw text inside annotations, nor change existing raw characters. Input names:
+
+Thaddeus Lynn, MD
+David I. Zuckerman
+Chang Liu
+Rupert Barkoff
+IAN GERRARD
+FLAVIA
+krishnamurthy rao
+Emmett Voorhees
+Calton Pu
+DAVID W FLYNN
+SOOK
+ROSADO, LUZ N
+GEORGE
+Baggs, Lawton
+Lisa Hsu
+Jane Orr
+richard arrandt dc
+Quentin R. Pirkle, Jr., MD
+Long Lu
+BRYANT
+Craig & Sandy Kubik
+SAVAGE
+KNOX
+BERGER
+ONEILL
+SNOW
+Ms. KELLI KAY HORTON ANDERSON
+Joan Dokson
+CLAY
+Lee P.
+
+
+
+Output:
+<GivenName>Thaddeus</GivenName> <Surname>Lynn,</Surname> <SuffixOther>MD</SuffixOther>
+<GivenName>David</GivenName> <MiddleInitial>I.</MiddleInitial> <Surname>Zuckerman</Surname>
+<GivenName>Chang</GivenName> <Surname>Liu</Surname>
+<GivenName>Rupert</GivenName> <Surname>Barkoff</Surname>
+<GivenName>IAN</GivenName> <Surname>GERRARD</Surname>
+<GivenName>FLAVIA</GivenName>
+<GivenName>krishnamurthy</GivenName> <Surname>rao</Surname>
+<GivenName>Emmett</GivenName> <Surname>Voorhees</Surname>
+<GivenName>Calton</GivenName> <Surname>Pu</Surname>
+<GivenName>DAVID</GivenName> <MiddleInitial>W.</MiddleInitial> <Surname>FLYNN</Surname>
+<GivenName>SOOK</GivenName>
+<GivenName>ROSADO,</GivenName> <GivenName>LUZ</GivenName> <Surname>N</Surname>
+<GivenName>GEORGE</GivenName>
+<GivenName>Baggs,</GivenName> <Surname>Lawton</Surname>
+<GivenName>Lisa</GivenName> <Surname>Hsu</Surname>
+<GivenName>Jane</GivenName> <Surname>Orr</Surname>
+<GivenName>richard</GivenName> <Surname>arrandt</Surname> <SuffixOther>dc</SuffixOther>
+<GivenName>Quentin</GivenName> <MiddleInitial>R.</MiddleInitial> <Surname>Pirkle,</Surname> <SuffixGenerational>Jr.,</SuffixGenerational> <SuffixOther>MD</SuffixOther>
+<GivenName>Long</GivenName> <Surname>Lu</Surname>
+<GivenName>BRYANT</GivenName>
+<GivenName>Craig</GivenName> <And>&</And> <GivenName>Sandy</GivenName> <Surname>Kubik</Surname>
+<GivenName>SAVAGE</GivenName>
+<GivenName>KNOX</GivenName>
+<GivenName>BERGER</GivenName>
+<GivenName>ONEILL</GivenName>
+<GivenName>SNOW</GivenName>
+<PrefixMarital>Ms.</PrefixMarital> <GivenName>KELLI</GivenName> <GivenName>KAY</GivenName> <Surname>HORTON</Surname> <Surname>ANDERSON</Surname>
+<GivenName>Joan</GivenName> <Surname>Dokson</Surname>
+<GivenName>CLAY</GivenName>
+<GivenName>Lee</GivenName> <MiddleInitial>P.</MiddleInitial>
+
+
+Time elapsed: 9.93 seconds
+
+Parsing batch starting at 120...
+
+Prompt (5884 characters, approx. 1961 tokens):
+
+You are a Named Entity Recognition (NER) tool that takes person names on input and adds XML annotations for
+different parts of the name: given name, surname, initials etc. You are allowed to use the following entities:
+GivenName, MiddleName, Surname, FirstInitial, MiddleInitial, LastInitial, Nickname, PrefixMarital, PrefixOther,
+SuffixGenerational, SuffixOther, And.
+Every subsequence of 1+ non-whitespace characters in a line must be annotated with an entity from the above list.
+Example output:
+
+<FirstInitial>A.</FirstInitial> <MiddleName>Richard</MiddleName> <Surname>Royal</Surname>
+<FirstInitial>C.R.</FirstInitial> <Surname>Ramakrishnan</Surname>
+<FirstInitial>R.</FirstInitial> <Surname>Sekar</Surname>
+<FirstInitial>W.</FirstInitial> <MiddleName>Bruce</MiddleName> <Surname>Croft</Surname>
+<GivenName>Arthur</GivenName> <Surname>Gray,</Surname> <SuffixGenerational>Jr.,</SuffixGenerational> <SuffixOther>M.D.</SuffixOther>
+<GivenName>Brandon</GivenName> <LastInitial>R.</LastInitial>
+<GivenName>Chenyang</GivenName> <LastInitial>Lu</LastInitial>
+<GivenName>Earl</GivenName> <Nickname>"The</Nickname> <Nickname>Goat"</Nickname> <Surname>Manigault</Surname>
+<GivenName>Elaheh</GivenName> <Nickname>(Eli)</Nickname> <Surname>Bozorgzadeh</Surname>
+<GivenName>Elizabeth</GivenName> <LastInitial>B</LastInitial>
+<GivenName>Florence</GivenName> <MiddleName>Carsley</MiddleName> <Surname>Barnett,</Surname> <SuffixOther>MD</SuffixOther>
+<GivenName>James</GivenName> <Nickname>"Mike"</Nickname> <Surname>Dyer</Surname> <SuffixGenerational>Sr.</SuffixGenerational>
+<GivenName>Mukesh</GivenName> <Nickname>"Tommy"</Nickname> <Surname>Patel</Surname>
+<GivenName>REYES</GivenName>
+<GivenName>SVITLANA</GivenName> <MiddleInitial>J</MiddleInitial> <Surname>MANDZY</Surname>
+<GivenName>Sarita</GivenName> <MiddleInitial>V.</MiddleInitial> <Surname>Adve</Surname>
+<GivenName>Tracy</GivenName> <Nickname>"T-Mac"</Nickname> <Surname>McGrady</Surname>
+<GivenName>bill</GivenName> <And>7</And> <GivenName>bev</GivenName> <Surname>campion</Surname>
+<GivenName>carlton</GivenName> <MiddleInitial>r</MiddleInitial> <Surname>marcyan,</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>chris</GivenName> <And>and</And> <GivenName>Jaydee</GivenName> <Surname>Smith</Surname>
+<GivenName>demetrios</GivenName> <Surname>stavrianos,</Surname>
+<GivenName>harry</GivenName> <MiddleName>c</MiddleName> <Surname>piper</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>joseph</GivenName> <And>&</And> <GivenName>golnar</GivenName> <Surname>phillips</Surname>
+<GivenName>ray</GivenName> <LastInitial>p</LastInitial>
+<LastInitial>S,</LastInitial> <GivenName>Kim</GivenName>
+<PrefixMarital>Miss</PrefixMarital> <GivenName>MARIETTA</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>ABALOS</Surname> <Surname>GALITO</Surname>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>George</GivenName> <MiddleInitial>W.</MiddleInitial> <Surname>Walker,</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>Max</GivenName> <Surname>McGlamry</Surname>
+<PrefixMarital>Mrs.</PrefixMarital> <GivenName>Larry</GivenName> <Surname>Bessinger</Surname>
+<PrefixMarital>Ms.</PrefixMarital> <GivenName>Carolyn</GivenName> <Surname>Davenport</Surname>
+<PrefixOther>Dr.</PrefixOther> <GivenName>George</GivenName> <Surname>Snelling</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <GivenName>Hugh</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>smisson</Surname> <SuffixGenerational>Jr.</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <Surname>Gomes</Surname> <And>&</And> <PrefixOther>Dr.</PrefixOther> <Surname>Lui</Surname>
+<PrefixOther>State</PrefixOther> <PrefixOther>Senator</PrefixOther> <GivenName>Kwame</GivenName> <Surname>Raoul</Surname>
+<PrefixOther>father</PrefixOther> <GivenName>michael</GivenName> <Surname>pfleger</Surname>
+<Surname>COOPER</Surname>
+<Surname>HARPOOL,</Surname> <FirstInitial>M.</FirstInitial> <MiddleName>DOUGLAS</MiddleName>
+<Surname>KING,</Surname> <GivenName>JO</GivenName> <GivenName>ANN</GivenName> <And>and</And> <GivenName>DAVID</GivenName>
+<Surname>Russell,</Surname> <GivenName>Herman</GivenName>
+<Surname>TROJAN,</Surname> <SuffixOther>BSN,</SuffixOther> <SuffixOther>RN,</SuffixOther> <SuffixOther>LNCC,</SuffixOther> <GivenName>CHRISTINE</GivenName>
+
+Observe that entities only include non-space characters and can only start and end on whitespace;
+comma "," can be used to reverse the order of given name vs surname;
+a single-word name may very well represent a surname rather than a given name;
+name prefixes and suffixes can be added for marital status, generation, education, profession etc.;
+initials and nicknames can be used instead, or in addition to, given names and surnames;
+"&" and "and" entities can be used to join multiple names (given names, surnames) on a single line;
+"Mr" should be treated as PrefixMarital not Other.
+
+Now, when you understand the rules, parse the following list of raw names and output corresponding annotations.
+Do NOT output anything else: no description, no line numbers, no bullet points. Do NOT insert any extra
+characters to the raw text inside annotations, nor change existing raw characters. Input names:
+
+RANGEL
+Matthew B.
+VALARIE
+Matthew B.
+Christine Soares Cox
+GARFIELD
+Guoliang Xue
+HUANG
+Jean Van der Sommen
+Randi Poole
+SCHWARTZ
+raymondd prybill
+KAUFMAN
+Shubhangi Saraf
+Chandrajit Bajaj
+sylvia lam mdsc
+Wang-Chien Lee
+WHITNEY
+richard a. shapiro attorney at law
+BARBARA HILL
+DAVILA
+bulbul & vimal bahuguna
+ELOY
+Dr & Mrs DERIC C MCINTOSH
+FOLEY
+WILFORD
+BROOKE
+Sharon Beasley Teague
+Munmun De Choudhury
+BRENNAN
+
+
+
+Output:
+<GivenName>RANGEL</GivenName>
+<GivenName>Matthew</GivenName> <MiddleInitial>B.</MiddleInitial>
+<GivenName>VALARIE</GivenName>
+<GivenName>Matthew</GivenName> <MiddleInitial>B.</MiddleInitial>
+<GivenName>Christine</GivenName> <MiddleName>Soares</MiddleName> <Surname>Cox</Surname>
+<GivenName>GARFIELD</GivenName>
+<GivenName>Guoliang</GivenName> <Surname>Xue</Surname>
+<GivenName>HUANG</GivenName>
+<GivenName>Jean</GivenName> <MiddleName>Van</MiddleName> <Surname>der</Surname> <Surname>Sommen</Surname>
+<GivenName>Randi</GivenName> <Surname>Poole</Surname>
+<GivenName>SCHWARTZ</GivenName>
+<GivenName>raymondd</GivenName> <Surname>prybill</Surname>
+<GivenName>KAUFMAN</GivenName>
+<GivenName>Shubhangi</GivenName> <Surname>Saraf</Surname>
+<GivenName>Chandrajit</GivenName> <Surname>Bajaj</Surname>
+<GivenName>sylvia</GivenName> <Surname>lam</Surname> <SuffixOther>mdsc</SuffixOther>
+<GivenName>Wang-Chien</GivenName> <Surname>Lee</Surname>
+<GivenName>WHITNEY</GivenName>
+<GivenName>richard</GivenName> <MiddleInitial>a.</MiddleInitial> <Surname>shapiro</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>BARBARA</GivenName> <Surname>HILL</Surname>
+<GivenName>DAVILA</GivenName>
+<GivenName>bulbul</GivenName> <And>&</And> <GivenName>vimal</GivenName> <Surname>bahuguna</Surname>
+<GivenName>ELOY</GivenName>
+<PrefixOther>Dr.</PrefixOther> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>DERIC</GivenName> <MiddleInitial>C</MiddleInitial> <Surname>MCINTOSH</Surname>
+<GivenName>FOLEY</GivenName>
+<GivenName>WILFORD</GivenName>
+<GivenName>BROOKE</GivenName>
+<GivenName>Sharon</GivenName> <Surname>Beasley</Surname> <Surname>Teague</Surname>
+<GivenName>Munmun</GivenName> <MiddleName>De</MiddleName> <Surname>Choudhury</Surname>
+<GivenName>BRENNAN</GivenName>
+
+
+Time elapsed: 11.11 seconds
+
+Parsing batch starting at 150...
+
+Prompt (5847 characters, approx. 1949 tokens):
+
+You are a Named Entity Recognition (NER) tool that takes person names on input and adds XML annotations for
+different parts of the name: given name, surname, initials etc. You are allowed to use the following entities:
+GivenName, MiddleName, Surname, FirstInitial, MiddleInitial, LastInitial, Nickname, PrefixMarital, PrefixOther,
+SuffixGenerational, SuffixOther, And.
+Every subsequence of 1+ non-whitespace characters in a line must be annotated with an entity from the above list.
+Example output:
+
+<FirstInitial>A.</FirstInitial> <MiddleName>Richard</MiddleName> <Surname>Royal</Surname>
+<FirstInitial>C.R.</FirstInitial> <Surname>Ramakrishnan</Surname>
+<FirstInitial>R.</FirstInitial> <Surname>Sekar</Surname>
+<FirstInitial>W.</FirstInitial> <MiddleName>Bruce</MiddleName> <Surname>Croft</Surname>
+<GivenName>Arthur</GivenName> <Surname>Gray,</Surname> <SuffixGenerational>Jr.,</SuffixGenerational> <SuffixOther>M.D.</SuffixOther>
+<GivenName>Brandon</GivenName> <LastInitial>R.</LastInitial>
+<GivenName>Chenyang</GivenName> <LastInitial>Lu</LastInitial>
+<GivenName>Earl</GivenName> <Nickname>"The</Nickname> <Nickname>Goat"</Nickname> <Surname>Manigault</Surname>
+<GivenName>Elaheh</GivenName> <Nickname>(Eli)</Nickname> <Surname>Bozorgzadeh</Surname>
+<GivenName>Elizabeth</GivenName> <LastInitial>B</LastInitial>
+<GivenName>Florence</GivenName> <MiddleName>Carsley</MiddleName> <Surname>Barnett,</Surname> <SuffixOther>MD</SuffixOther>
+<GivenName>James</GivenName> <Nickname>"Mike"</Nickname> <Surname>Dyer</Surname> <SuffixGenerational>Sr.</SuffixGenerational>
+<GivenName>Mukesh</GivenName> <Nickname>"Tommy"</Nickname> <Surname>Patel</Surname>
+<GivenName>REYES</GivenName>
+<GivenName>SVITLANA</GivenName> <MiddleInitial>J</MiddleInitial> <Surname>MANDZY</Surname>
+<GivenName>Sarita</GivenName> <MiddleInitial>V.</MiddleInitial> <Surname>Adve</Surname>
+<GivenName>Tracy</GivenName> <Nickname>"T-Mac"</Nickname> <Surname>McGrady</Surname>
+<GivenName>bill</GivenName> <And>7</And> <GivenName>bev</GivenName> <Surname>campion</Surname>
+<GivenName>carlton</GivenName> <MiddleInitial>r</MiddleInitial> <Surname>marcyan,</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>chris</GivenName> <And>and</And> <GivenName>Jaydee</GivenName> <Surname>Smith</Surname>
+<GivenName>demetrios</GivenName> <Surname>stavrianos,</Surname>
+<GivenName>harry</GivenName> <MiddleName>c</MiddleName> <Surname>piper</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>joseph</GivenName> <And>&</And> <GivenName>golnar</GivenName> <Surname>phillips</Surname>
+<GivenName>ray</GivenName> <LastInitial>p</LastInitial>
+<LastInitial>S,</LastInitial> <GivenName>Kim</GivenName>
+<PrefixMarital>Miss</PrefixMarital> <GivenName>MARIETTA</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>ABALOS</Surname> <Surname>GALITO</Surname>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>George</GivenName> <MiddleInitial>W.</MiddleInitial> <Surname>Walker,</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>Max</GivenName> <Surname>McGlamry</Surname>
+<PrefixMarital>Mrs.</PrefixMarital> <GivenName>Larry</GivenName> <Surname>Bessinger</Surname>
+<PrefixMarital>Ms.</PrefixMarital> <GivenName>Carolyn</GivenName> <Surname>Davenport</Surname>
+<PrefixOther>Dr.</PrefixOther> <GivenName>George</GivenName> <Surname>Snelling</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <GivenName>Hugh</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>smisson</Surname> <SuffixGenerational>Jr.</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <Surname>Gomes</Surname> <And>&</And> <PrefixOther>Dr.</PrefixOther> <Surname>Lui</Surname>
+<PrefixOther>State</PrefixOther> <PrefixOther>Senator</PrefixOther> <GivenName>Kwame</GivenName> <Surname>Raoul</Surname>
+<PrefixOther>father</PrefixOther> <GivenName>michael</GivenName> <Surname>pfleger</Surname>
+<Surname>COOPER</Surname>
+<Surname>HARPOOL,</Surname> <FirstInitial>M.</FirstInitial> <MiddleName>DOUGLAS</MiddleName>
+<Surname>KING,</Surname> <GivenName>JO</GivenName> <GivenName>ANN</GivenName> <And>and</And> <GivenName>DAVID</GivenName>
+<Surname>Russell,</Surname> <GivenName>Herman</GivenName>
+<Surname>TROJAN,</Surname> <SuffixOther>BSN,</SuffixOther> <SuffixOther>RN,</SuffixOther> <SuffixOther>LNCC,</SuffixOther> <GivenName>CHRISTINE</GivenName>
+
+Observe that entities only include non-space characters and can only start and end on whitespace;
+comma "," can be used to reverse the order of given name vs surname;
+a single-word name may very well represent a surname rather than a given name;
+name prefixes and suffixes can be added for marital status, generation, education, profession etc.;
+initials and nicknames can be used instead, or in addition to, given names and surnames;
+"&" and "and" entities can be used to join multiple names (given names, surnames) on a single line;
+"Mr" should be treated as PrefixMarital not Other.
+
+Now, when you understand the rules, parse the following list of raw names and output corresponding annotations.
+Do NOT output anything else: no description, no line numbers, no bullet points. Do NOT insert any extra
+characters to the raw text inside annotations, nor change existing raw characters. Input names:
+
+CARTER BARRETT
+DOUGLASS
+RYAN
+Yusu Wang
+Lui Sha
+CANNON
+Ms NNEMDI A BAIRD
+KEITH
+Munmun De Choudhury
+Hugh Sosebee, Jr.
+NGUYEN
+SLOAN
+DE LA TORRE, MANUEL
+Percy Liang
+Alfonso F. Cardenas
+COLLEEN
+JEFFERSON
+RICHARD NAYLOR
+JAMISON
+EL AGATHE A TEMBENG
+Mingyan Liu
+FUENTES
+Edward Stephens SR
+HOGAN
+Stephen Chong
+Dr. Ralph D'Auria
+BARRY EVAN WEINSTEIN
+Yung-Hsiang Lu
+SARAI
+VALERY
+
+
+
+Output:
+<CARTER> <BARRETT>
+<DOUGLASS>
+<RYAN>
+<Yusu> <Wang>
+<Lui> <Sha>
+<CANNON>
+<Ms> <NNEMDI> <A> <BAIRD>
+<KEITH>
+<Munmun> <De> <Choudhury>
+<Hugh> <Sosebee,> <Jr.>
+<NGUYEN>
+<SLOAN>
+<DE> <LA> <TORRE,> <MANUEL>
+<Percy> <Liang>
+<Alfonso> <F.> <Cardenas>
+<COLLEEN>
+<JEFFERSON>
+<RICHARD> <NAYLOR>
+<JAMISON>
+<EL> <AGATHE> <A> <TEMBENG>
+<Mingyan> <Liu>
+<FUENTES>
+<Edward> <Stephens> <SR>
+<HOGAN>
+<Stephen> <Chong>
+<Dr.> <Ralph> <D'Auria>
+<BARRY> <EVAN> <WEINSTEIN>
+<Yung-Hsiang> <Lu>
+<SARAI>
+<VALERY>
+
+
+Time elapsed: 4.35 seconds
+
+
+WARNING: 0 outputs with no proper XML tags, 30 outputs with wrong XML tags
+
+Retrying (1)...
+
+Prompt (5847 characters, approx. 1949 tokens):
+
+You are a Named Entity Recognition (NER) tool that takes person names on input and adds XML annotations for
+different parts of the name: given name, surname, initials etc. You are allowed to use the following entities:
+GivenName, MiddleName, Surname, FirstInitial, MiddleInitial, LastInitial, Nickname, PrefixMarital, PrefixOther,
+SuffixGenerational, SuffixOther, And.
+Every subsequence of 1+ non-whitespace characters in a line must be annotated with an entity from the above list.
+Example output:
+
+<FirstInitial>A.</FirstInitial> <MiddleName>Richard</MiddleName> <Surname>Royal</Surname>
+<FirstInitial>C.R.</FirstInitial> <Surname>Ramakrishnan</Surname>
+<FirstInitial>R.</FirstInitial> <Surname>Sekar</Surname>
+<FirstInitial>W.</FirstInitial> <MiddleName>Bruce</MiddleName> <Surname>Croft</Surname>
+<GivenName>Arthur</GivenName> <Surname>Gray,</Surname> <SuffixGenerational>Jr.,</SuffixGenerational> <SuffixOther>M.D.</SuffixOther>
+<GivenName>Brandon</GivenName> <LastInitial>R.</LastInitial>
+<GivenName>Chenyang</GivenName> <LastInitial>Lu</LastInitial>
+<GivenName>Earl</GivenName> <Nickname>"The</Nickname> <Nickname>Goat"</Nickname> <Surname>Manigault</Surname>
+<GivenName>Elaheh</GivenName> <Nickname>(Eli)</Nickname> <Surname>Bozorgzadeh</Surname>
+<GivenName>Elizabeth</GivenName> <LastInitial>B</LastInitial>
+<GivenName>Florence</GivenName> <MiddleName>Carsley</MiddleName> <Surname>Barnett,</Surname> <SuffixOther>MD</SuffixOther>
+<GivenName>James</GivenName> <Nickname>"Mike"</Nickname> <Surname>Dyer</Surname> <SuffixGenerational>Sr.</SuffixGenerational>
+<GivenName>Mukesh</GivenName> <Nickname>"Tommy"</Nickname> <Surname>Patel</Surname>
+<GivenName>REYES</GivenName>
+<GivenName>SVITLANA</GivenName> <MiddleInitial>J</MiddleInitial> <Surname>MANDZY</Surname>
+<GivenName>Sarita</GivenName> <MiddleInitial>V.</MiddleInitial> <Surname>Adve</Surname>
+<GivenName>Tracy</GivenName> <Nickname>"T-Mac"</Nickname> <Surname>McGrady</Surname>
+<GivenName>bill</GivenName> <And>7</And> <GivenName>bev</GivenName> <Surname>campion</Surname>
+<GivenName>carlton</GivenName> <MiddleInitial>r</MiddleInitial> <Surname>marcyan,</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>chris</GivenName> <And>and</And> <GivenName>Jaydee</GivenName> <Surname>Smith</Surname>
+<GivenName>demetrios</GivenName> <Surname>stavrianos,</Surname>
+<GivenName>harry</GivenName> <MiddleName>c</MiddleName> <Surname>piper</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>joseph</GivenName> <And>&</And> <GivenName>golnar</GivenName> <Surname>phillips</Surname>
+<GivenName>ray</GivenName> <LastInitial>p</LastInitial>
+<LastInitial>S,</LastInitial> <GivenName>Kim</GivenName>
+<PrefixMarital>Miss</PrefixMarital> <GivenName>MARIETTA</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>ABALOS</Surname> <Surname>GALITO</Surname>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>George</GivenName> <MiddleInitial>W.</MiddleInitial> <Surname>Walker,</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>Max</GivenName> <Surname>McGlamry</Surname>
+<PrefixMarital>Mrs.</PrefixMarital> <GivenName>Larry</GivenName> <Surname>Bessinger</Surname>
+<PrefixMarital>Ms.</PrefixMarital> <GivenName>Carolyn</GivenName> <Surname>Davenport</Surname>
+<PrefixOther>Dr.</PrefixOther> <GivenName>George</GivenName> <Surname>Snelling</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <GivenName>Hugh</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>smisson</Surname> <SuffixGenerational>Jr.</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <Surname>Gomes</Surname> <And>&</And> <PrefixOther>Dr.</PrefixOther> <Surname>Lui</Surname>
+<PrefixOther>State</PrefixOther> <PrefixOther>Senator</PrefixOther> <GivenName>Kwame</GivenName> <Surname>Raoul</Surname>
+<PrefixOther>father</PrefixOther> <GivenName>michael</GivenName> <Surname>pfleger</Surname>
+<Surname>COOPER</Surname>
+<Surname>HARPOOL,</Surname> <FirstInitial>M.</FirstInitial> <MiddleName>DOUGLAS</MiddleName>
+<Surname>KING,</Surname> <GivenName>JO</GivenName> <GivenName>ANN</GivenName> <And>and</And> <GivenName>DAVID</GivenName>
+<Surname>Russell,</Surname> <GivenName>Herman</GivenName>
+<Surname>TROJAN,</Surname> <SuffixOther>BSN,</SuffixOther> <SuffixOther>RN,</SuffixOther> <SuffixOther>LNCC,</SuffixOther> <GivenName>CHRISTINE</GivenName>
+
+Observe that entities only include non-space characters and can only start and end on whitespace;
+comma "," can be used to reverse the order of given name vs surname;
+a single-word name may very well represent a surname rather than a given name;
+name prefixes and suffixes can be added for marital status, generation, education, profession etc.;
+initials and nicknames can be used instead, or in addition to, given names and surnames;
+"&" and "and" entities can be used to join multiple names (given names, surnames) on a single line;
+"Mr" should be treated as PrefixMarital not Other.
+
+Now, when you understand the rules, parse the following list of raw names and output corresponding annotations.
+Do NOT output anything else: no description, no line numbers, no bullet points. Do NOT insert any extra
+characters to the raw text inside annotations, nor change existing raw characters. Input names:
+
+CARTER BARRETT
+DOUGLASS
+RYAN
+Yusu Wang
+Lui Sha
+CANNON
+Ms NNEMDI A BAIRD
+KEITH
+Munmun De Choudhury
+Hugh Sosebee, Jr.
+NGUYEN
+SLOAN
+DE LA TORRE, MANUEL
+Percy Liang
+Alfonso F. Cardenas
+COLLEEN
+JEFFERSON
+RICHARD NAYLOR
+JAMISON
+EL AGATHE A TEMBENG
+Mingyan Liu
+FUENTES
+Edward Stephens SR
+HOGAN
+Stephen Chong
+Dr. Ralph D'Auria
+BARRY EVAN WEINSTEIN
+Yung-Hsiang Lu
+SARAI
+VALERY
+
+
+
+Output:
+<GivenName>CARTER</GivenName> <Surname>BARRETT</Surname>
+<Surname>DOUGLASS</Surname>
+<GivenName>RYAN</GivenName>
+<GivenName>Yusu</GivenName> <Surname>Wang</Surname>
+<GivenName>Lui</GivenName> <Surname>Sha</Surname>
+<Surname>CANNON</Surname>
+<PrefixMarital>Ms.</PrefixMarital> <GivenName>NNEMDI</GivenName> <MiddleInitial>A</MiddleInitial> <Surname>BAIRD</Surname>
+<GivenName>KEITH</GivenName>
+<GivenName>Munmun</GivenName> <Surname>De</Surname> <Surname>Choudhury</Surname>
+<GivenName>Hugh</GivenName> <Surname>Sosebee,</Surname> <SuffixGenerational>Jr.</SuffixGenerational>
+<Surname>NGUYEN</Surname>
+<Surname>SLOAN</Surname>
+<Surname>DE</Surname> <Surname>LA</Surname> <Surname>TORRE,</Surname> <GivenName>MANUEL</GivenName>
+<GivenName>Percy</GivenName> <Surname>Liang</Surname>
+<GivenName>Alfonso</GivenName> <MiddleInitial>F.</MiddleInitial> <Surname>Cardenas</Surname>
+<GivenName>COLLEEN</GivenName>
+<GivenName>JEFFERSON</GivenName>
+<GivenName>RICHARD</GivenName> <Surname>NAYLOR</Surname>
+<GivenName>JAMISON</GivenName>
+<GivenName>EL</GivenName> <GivenName>AGATHE</GivenName> <GivenName>A</GivenName> <Surname>TEMBENG</Surname>
+<GivenName>Mingyan</GivenName> <Surname>Liu</Surname>
+<Surname>FUENTES</Surname>
+<GivenName>Edward</GivenName> <GivenName>Stephens</GivenName> <SuffixGenerational>SR</SuffixGenerational>
+<Surname>HOGAN</Surname>
+<GivenName>Stephen</GivenName> <Surname>Chong</Surname>
+<PrefixOther>Dr.</PrefixOther> <GivenName>Ralph</GivenName> <GivenName>D'Auria</GivenName>
+<GivenName>BARRY</GivenName> <GivenName>EVAN</GivenName> <Surname>WEINSTEIN</Surname>
+<GivenName>Yung-Hsiang</GivenName> <Surname>Lu</Surname>
+<GivenName>SARAI</GivenName>
+<GivenName>VALERY</GivenName>
+
+
+Time elapsed: 8.40 seconds
+
+Parsing batch starting at 180...
+
+Prompt (5918 characters, approx. 1972 tokens):
+
+You are a Named Entity Recognition (NER) tool that takes person names on input and adds XML annotations for
+different parts of the name: given name, surname, initials etc. You are allowed to use the following entities:
+GivenName, MiddleName, Surname, FirstInitial, MiddleInitial, LastInitial, Nickname, PrefixMarital, PrefixOther,
+SuffixGenerational, SuffixOther, And.
+Every subsequence of 1+ non-whitespace characters in a line must be annotated with an entity from the above list.
+Example output:
+
+<FirstInitial>A.</FirstInitial> <MiddleName>Richard</MiddleName> <Surname>Royal</Surname>
+<FirstInitial>C.R.</FirstInitial> <Surname>Ramakrishnan</Surname>
+<FirstInitial>R.</FirstInitial> <Surname>Sekar</Surname>
+<FirstInitial>W.</FirstInitial> <MiddleName>Bruce</MiddleName> <Surname>Croft</Surname>
+<GivenName>Arthur</GivenName> <Surname>Gray,</Surname> <SuffixGenerational>Jr.,</SuffixGenerational> <SuffixOther>M.D.</SuffixOther>
+<GivenName>Brandon</GivenName> <LastInitial>R.</LastInitial>
+<GivenName>Chenyang</GivenName> <LastInitial>Lu</LastInitial>
+<GivenName>Earl</GivenName> <Nickname>"The</Nickname> <Nickname>Goat"</Nickname> <Surname>Manigault</Surname>
+<GivenName>Elaheh</GivenName> <Nickname>(Eli)</Nickname> <Surname>Bozorgzadeh</Surname>
+<GivenName>Elizabeth</GivenName> <LastInitial>B</LastInitial>
+<GivenName>Florence</GivenName> <MiddleName>Carsley</MiddleName> <Surname>Barnett,</Surname> <SuffixOther>MD</SuffixOther>
+<GivenName>James</GivenName> <Nickname>"Mike"</Nickname> <Surname>Dyer</Surname> <SuffixGenerational>Sr.</SuffixGenerational>
+<GivenName>Mukesh</GivenName> <Nickname>"Tommy"</Nickname> <Surname>Patel</Surname>
+<GivenName>REYES</GivenName>
+<GivenName>SVITLANA</GivenName> <MiddleInitial>J</MiddleInitial> <Surname>MANDZY</Surname>
+<GivenName>Sarita</GivenName> <MiddleInitial>V.</MiddleInitial> <Surname>Adve</Surname>
+<GivenName>Tracy</GivenName> <Nickname>"T-Mac"</Nickname> <Surname>McGrady</Surname>
+<GivenName>bill</GivenName> <And>7</And> <GivenName>bev</GivenName> <Surname>campion</Surname>
+<GivenName>carlton</GivenName> <MiddleInitial>r</MiddleInitial> <Surname>marcyan,</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>chris</GivenName> <And>and</And> <GivenName>Jaydee</GivenName> <Surname>Smith</Surname>
+<GivenName>demetrios</GivenName> <Surname>stavrianos,</Surname>
+<GivenName>harry</GivenName> <MiddleName>c</MiddleName> <Surname>piper</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>joseph</GivenName> <And>&</And> <GivenName>golnar</GivenName> <Surname>phillips</Surname>
+<GivenName>ray</GivenName> <LastInitial>p</LastInitial>
+<LastInitial>S,</LastInitial> <GivenName>Kim</GivenName>
+<PrefixMarital>Miss</PrefixMarital> <GivenName>MARIETTA</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>ABALOS</Surname> <Surname>GALITO</Surname>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>George</GivenName> <MiddleInitial>W.</MiddleInitial> <Surname>Walker,</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>Max</GivenName> <Surname>McGlamry</Surname>
+<PrefixMarital>Mrs.</PrefixMarital> <GivenName>Larry</GivenName> <Surname>Bessinger</Surname>
+<PrefixMarital>Ms.</PrefixMarital> <GivenName>Carolyn</GivenName> <Surname>Davenport</Surname>
+<PrefixOther>Dr.</PrefixOther> <GivenName>George</GivenName> <Surname>Snelling</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <GivenName>Hugh</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>smisson</Surname> <SuffixGenerational>Jr.</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <Surname>Gomes</Surname> <And>&</And> <PrefixOther>Dr.</PrefixOther> <Surname>Lui</Surname>
+<PrefixOther>State</PrefixOther> <PrefixOther>Senator</PrefixOther> <GivenName>Kwame</GivenName> <Surname>Raoul</Surname>
+<PrefixOther>father</PrefixOther> <GivenName>michael</GivenName> <Surname>pfleger</Surname>
+<Surname>COOPER</Surname>
+<Surname>HARPOOL,</Surname> <FirstInitial>M.</FirstInitial> <MiddleName>DOUGLAS</MiddleName>
+<Surname>KING,</Surname> <GivenName>JO</GivenName> <GivenName>ANN</GivenName> <And>and</And> <GivenName>DAVID</GivenName>
+<Surname>Russell,</Surname> <GivenName>Herman</GivenName>
+<Surname>TROJAN,</Surname> <SuffixOther>BSN,</SuffixOther> <SuffixOther>RN,</SuffixOther> <SuffixOther>LNCC,</SuffixOther> <GivenName>CHRISTINE</GivenName>
+
+Observe that entities only include non-space characters and can only start and end on whitespace;
+comma "," can be used to reverse the order of given name vs surname;
+a single-word name may very well represent a surname rather than a given name;
+name prefixes and suffixes can be added for marital status, generation, education, profession etc.;
+initials and nicknames can be used instead, or in addition to, given names and surnames;
+"&" and "and" entities can be used to join multiple names (given names, surnames) on a single line;
+"Mr" should be treated as PrefixMarital not Other.
+
+Now, when you understand the rules, parse the following list of raw names and output corresponding annotations.
+Do NOT output anything else: no description, no line numbers, no bullet points. Do NOT insert any extra
+characters to the raw text inside annotations, nor change existing raw characters. Input names:
+
+Josephine Clingan M.D.
+GRANT
+ROSAMOND
+MC NICHOLAS, DANIEL D
+WILLIS III, RICHARD C
+Jin-Yi Cai
+ZANE
+MCMILLAN, PETER 'PEDRO'
+Mihai Pop
+LYNN
+THomas "Woody" Sampson II
+FRANKLIN
+Lirong Xia
+FROST
+Sharon A. Gay Esq.
+John bonner
+JENNIFER ALICE WHITE
+THomas "Woody" Sampson II
+S. Davenport
+Abraham H Haddad
+MS KEITHA M ARNOLD
+BRAD
+STEVENS
+Nick Dickinson II
+Yan Liu
+Remzi Arpaci-Dusseau
+Jerry Zhu
+HOLLAND
+Michael Johannes Jurgens, MD
+MARTINEZ, PEDRO
+
+
+
+Output:
+<GivenName>Josephine</GivenName> <Surname>Clingan</Surname> <Surname>M.D.</Surname>
+<Surname>GRANT</Surname>
+<Surname>ROSAMOND</Surname>
+<GivenName>DANIEL</GivenName> <Surname>MC</Surname> <Surname>NICHOLAS,</Surname> <Surname>D</Surname>
+<GivenName>WILLIS</GivenName> <SuffixGenerational>III,</SuffixGenerational> <GivenName>RICHARD</GivenName> <Surname>C</Surname>
+<GivenName>Jin-Yi</GivenName> <Surname>Cai</Surname>
+<Surname>ZANE</Surname>
+<GivenName>PETER</GivenName> <Nickname>'PEDRO'</Nickname> <Surname>MCMILLAN,</Surname>
+<GivenName>Mihai</GivenName> <Surname>Pop</Surname>
+<Surname>LYNN</Surname>
+<GivenName>THomas</GivenName> <Nickname>"Woody"</Nickname> <Surname>Sampson</Surname> <SuffixGenerational>II</SuffixGenerational>
+<GivenName>FRANKLIN</GivenName>
+<GivenName>Lirong</GivenName> <Surname>Xia</Surname>
+<Surname>FROST</Surname>
+<GivenName>Sharon</GivenName> <MiddleInitial>A.</MiddleInitial> <Surname>Gay</Surname> <SuffixOther>Esq.</SuffixOther>
+<GivenName>John</GivenName> <Surname>bonner</Surname>
+<GivenName>JENNIFER</GivenName> <GivenName>ALICE</GivenName> <Surname>WHITE</Surname>
+<GivenName>THomas</GivenName> <Nickname>"Woody"</Nickname> <Surname>Sampson</Surname> <SuffixGenerational>II</SuffixGenerational>
+<FirstInitial>S.</FirstInitial> <Surname>Davenport</Surname>
+<GivenName>Abraham</GivenName> <MiddleInitial>H</MiddleInitial> <Surname>Haddad</Surname>
+<PrefixMarital>MS</PrefixMarital> <GivenName>KEITHA</GivenName> <MiddleInitial>M</MiddleInitial> <Surname>ARNOLD</Surname>
+<GivenName>BRAD</GivenName>
+<GivenName>STEVENS</GivenName>
+<GivenName>Nick</GivenName> <Surname>Dickinson</Surname> <SuffixGenerational>II</SuffixGenerational>
+<GivenName>Yan</GivenName> <Surname>Liu</Surname>
+<GivenName>Remzi</GivenName> <Surname>Arpaci-Dusseau</Surname>
+<GivenName>Jerry</GivenName> <Surname>Zhu</Surname>
+<Surname>HOLLAND</Surname>
+<GivenName>Michael</GivenName> <MiddleName>Johannes</MiddleName> <Surname>Jurgens,</Surname> <SuffixOther>MD</SuffixOther>
+<GivenName>PEDRO</GivenName> <Surname>MARTINEZ,</Surname>
+
+
+Time elapsed: 10.37 seconds
+
+Parsing batch starting at 210...
+
+Prompt (5806 characters, approx. 1935 tokens):
+
+You are a Named Entity Recognition (NER) tool that takes person names on input and adds XML annotations for
+different parts of the name: given name, surname, initials etc. You are allowed to use the following entities:
+GivenName, MiddleName, Surname, FirstInitial, MiddleInitial, LastInitial, Nickname, PrefixMarital, PrefixOther,
+SuffixGenerational, SuffixOther, And.
+Every subsequence of 1+ non-whitespace characters in a line must be annotated with an entity from the above list.
+Example output:
+
+<FirstInitial>A.</FirstInitial> <MiddleName>Richard</MiddleName> <Surname>Royal</Surname>
+<FirstInitial>C.R.</FirstInitial> <Surname>Ramakrishnan</Surname>
+<FirstInitial>R.</FirstInitial> <Surname>Sekar</Surname>
+<FirstInitial>W.</FirstInitial> <MiddleName>Bruce</MiddleName> <Surname>Croft</Surname>
+<GivenName>Arthur</GivenName> <Surname>Gray,</Surname> <SuffixGenerational>Jr.,</SuffixGenerational> <SuffixOther>M.D.</SuffixOther>
+<GivenName>Brandon</GivenName> <LastInitial>R.</LastInitial>
+<GivenName>Chenyang</GivenName> <LastInitial>Lu</LastInitial>
+<GivenName>Earl</GivenName> <Nickname>"The</Nickname> <Nickname>Goat"</Nickname> <Surname>Manigault</Surname>
+<GivenName>Elaheh</GivenName> <Nickname>(Eli)</Nickname> <Surname>Bozorgzadeh</Surname>
+<GivenName>Elizabeth</GivenName> <LastInitial>B</LastInitial>
+<GivenName>Florence</GivenName> <MiddleName>Carsley</MiddleName> <Surname>Barnett,</Surname> <SuffixOther>MD</SuffixOther>
+<GivenName>James</GivenName> <Nickname>"Mike"</Nickname> <Surname>Dyer</Surname> <SuffixGenerational>Sr.</SuffixGenerational>
+<GivenName>Mukesh</GivenName> <Nickname>"Tommy"</Nickname> <Surname>Patel</Surname>
+<GivenName>REYES</GivenName>
+<GivenName>SVITLANA</GivenName> <MiddleInitial>J</MiddleInitial> <Surname>MANDZY</Surname>
+<GivenName>Sarita</GivenName> <MiddleInitial>V.</MiddleInitial> <Surname>Adve</Surname>
+<GivenName>Tracy</GivenName> <Nickname>"T-Mac"</Nickname> <Surname>McGrady</Surname>
+<GivenName>bill</GivenName> <And>7</And> <GivenName>bev</GivenName> <Surname>campion</Surname>
+<GivenName>carlton</GivenName> <MiddleInitial>r</MiddleInitial> <Surname>marcyan,</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>chris</GivenName> <And>and</And> <GivenName>Jaydee</GivenName> <Surname>Smith</Surname>
+<GivenName>demetrios</GivenName> <Surname>stavrianos,</Surname>
+<GivenName>harry</GivenName> <MiddleName>c</MiddleName> <Surname>piper</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>joseph</GivenName> <And>&</And> <GivenName>golnar</GivenName> <Surname>phillips</Surname>
+<GivenName>ray</GivenName> <LastInitial>p</LastInitial>
+<LastInitial>S,</LastInitial> <GivenName>Kim</GivenName>
+<PrefixMarital>Miss</PrefixMarital> <GivenName>MARIETTA</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>ABALOS</Surname> <Surname>GALITO</Surname>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>George</GivenName> <MiddleInitial>W.</MiddleInitial> <Surname>Walker,</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>Max</GivenName> <Surname>McGlamry</Surname>
+<PrefixMarital>Mrs.</PrefixMarital> <GivenName>Larry</GivenName> <Surname>Bessinger</Surname>
+<PrefixMarital>Ms.</PrefixMarital> <GivenName>Carolyn</GivenName> <Surname>Davenport</Surname>
+<PrefixOther>Dr.</PrefixOther> <GivenName>George</GivenName> <Surname>Snelling</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <GivenName>Hugh</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>smisson</Surname> <SuffixGenerational>Jr.</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <Surname>Gomes</Surname> <And>&</And> <PrefixOther>Dr.</PrefixOther> <Surname>Lui</Surname>
+<PrefixOther>State</PrefixOther> <PrefixOther>Senator</PrefixOther> <GivenName>Kwame</GivenName> <Surname>Raoul</Surname>
+<PrefixOther>father</PrefixOther> <GivenName>michael</GivenName> <Surname>pfleger</Surname>
+<Surname>COOPER</Surname>
+<Surname>HARPOOL,</Surname> <FirstInitial>M.</FirstInitial> <MiddleName>DOUGLAS</MiddleName>
+<Surname>KING,</Surname> <GivenName>JO</GivenName> <GivenName>ANN</GivenName> <And>and</And> <GivenName>DAVID</GivenName>
+<Surname>Russell,</Surname> <GivenName>Herman</GivenName>
+<Surname>TROJAN,</Surname> <SuffixOther>BSN,</SuffixOther> <SuffixOther>RN,</SuffixOther> <SuffixOther>LNCC,</SuffixOther> <GivenName>CHRISTINE</GivenName>
+
+Observe that entities only include non-space characters and can only start and end on whitespace;
+comma "," can be used to reverse the order of given name vs surname;
+a single-word name may very well represent a surname rather than a given name;
+name prefixes and suffixes can be added for marital status, generation, education, profession etc.;
+initials and nicknames can be used instead, or in addition to, given names and surnames;
+"&" and "and" entities can be used to join multiple names (given names, surnames) on a single line;
+"Mr" should be treated as PrefixMarital not Other.
+
+Now, when you understand the rules, parse the following list of raw names and output corresponding annotations.
+Do NOT output anything else: no description, no line numbers, no bullet points. Do NOT insert any extra
+characters to the raw text inside annotations, nor change existing raw characters. Input names:
+
+Emanuel Chris Welch
+ROACH
+Harry Xu
+PHILIP
+FAIRY
+AGUILAR
+Dr & Mrs RUSKIN LINES
+TAPIA
+SALAS
+terry t.
+GEORGE
+Ben Y. Zhao
+DYLAN
+Randal C. Nelson
+JOYCE
+DELENA
+Kai Shen
+tita e. roach
+Gordon S. Novak Jr.
+Kevin G.
+Letson Andrew
+MIZZI, MARY A
+TANNER
+ALMAZAN, SONIA
+Percy Liang
+J Mark Bayless DMD
+W. Terry Wingfield
+Jinbo Xu
+ROBIN
+SILAS
+
+
+
+Output:
+<GivenName>Emanuel</GivenName> <GivenName>Chris</GivenName> <Surname>Welch</Surname>
+<Surname>ROACH</Surname>
+<GivenName>Harry</GivenName> <Surname>Xu</Surname>
+<GivenName>PHILIP</GivenName>
+<GivenName>FAIRY</GivenName>
+<GivenName>AGUILAR</GivenName>
+<PrefixOther>Dr.</PrefixOther> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>RUSKIN</GivenName> <Surname>LINES</Surname>
+<GivenName>TAPIA</GivenName>
+<GivenName>SALAS</GivenName>
+<GivenName>terry</GivenName> <GivenName>t.</GivenName>
+<GivenName>GEORGE</GivenName>
+<GivenName>Ben</GivenName> <MiddleInitial>Y.</MiddleInitial> <Surname>Zhao</Surname>
+<GivenName>DYLAN</GivenName>
+<GivenName>Randal</GivenName> <MiddleInitial>C.</MiddleInitial> <Surname>Nelson</Surname>
+<GivenName>JOYCE</GivenName>
+<GivenName>DELENA</GivenName>
+<GivenName>Kai</GivenName> <Surname>Shen</Surname>
+<GivenName>tita</GivenName> <MiddleInitial>e.</MiddleInitial> <Surname>roach</Surname>
+<GivenName>Gordon</GivenName> <MiddleInitial>S.</MiddleInitial> <Surname>Novak</Surname> <SuffixGenerational>Jr.</SuffixGenerational>
+<GivenName>Kevin</GivenName> <MiddleInitial>G.</MiddleInitial>
+<GivenName>Letson</GivenName> <GivenName>Andrew</GivenName>
+<Surname>MIZZI,</Surname> <GivenName>MARY</GivenName> <MiddleInitial>A</MiddleInitial>
+<GivenName>TANNER</GivenName>
+<Surname>ALMAZAN,</Surname> <GivenName>SONIA</GivenName>
+<GivenName>Percy</GivenName> <Surname>Liang</Surname>
+<GivenName>J</GivenName> <MiddleName>Mark</MiddleName> <Surname>Bayless</Surname> <SuffixOther>DMD</SuffixOther>
+<FirstInitial>W.</FirstInitial> <GivenName>Terry</GivenName> <Surname>Wingfield</Surname>
+<GivenName>Jinbo</GivenName> <Surname>Xu</Surname>
+<GivenName>ROBIN</GivenName>
+<GivenName>SILAS</GivenName>
+
+
+Time elapsed: 8.84 seconds
+
+Parsing batch starting at 240...
+
+Prompt (5907 characters, approx. 1969 tokens):
+
+You are a Named Entity Recognition (NER) tool that takes person names on input and adds XML annotations for
+different parts of the name: given name, surname, initials etc. You are allowed to use the following entities:
+GivenName, MiddleName, Surname, FirstInitial, MiddleInitial, LastInitial, Nickname, PrefixMarital, PrefixOther,
+SuffixGenerational, SuffixOther, And.
+Every subsequence of 1+ non-whitespace characters in a line must be annotated with an entity from the above list.
+Example output:
+
+<FirstInitial>A.</FirstInitial> <MiddleName>Richard</MiddleName> <Surname>Royal</Surname>
+<FirstInitial>C.R.</FirstInitial> <Surname>Ramakrishnan</Surname>
+<FirstInitial>R.</FirstInitial> <Surname>Sekar</Surname>
+<FirstInitial>W.</FirstInitial> <MiddleName>Bruce</MiddleName> <Surname>Croft</Surname>
+<GivenName>Arthur</GivenName> <Surname>Gray,</Surname> <SuffixGenerational>Jr.,</SuffixGenerational> <SuffixOther>M.D.</SuffixOther>
+<GivenName>Brandon</GivenName> <LastInitial>R.</LastInitial>
+<GivenName>Chenyang</GivenName> <LastInitial>Lu</LastInitial>
+<GivenName>Earl</GivenName> <Nickname>"The</Nickname> <Nickname>Goat"</Nickname> <Surname>Manigault</Surname>
+<GivenName>Elaheh</GivenName> <Nickname>(Eli)</Nickname> <Surname>Bozorgzadeh</Surname>
+<GivenName>Elizabeth</GivenName> <LastInitial>B</LastInitial>
+<GivenName>Florence</GivenName> <MiddleName>Carsley</MiddleName> <Surname>Barnett,</Surname> <SuffixOther>MD</SuffixOther>
+<GivenName>James</GivenName> <Nickname>"Mike"</Nickname> <Surname>Dyer</Surname> <SuffixGenerational>Sr.</SuffixGenerational>
+<GivenName>Mukesh</GivenName> <Nickname>"Tommy"</Nickname> <Surname>Patel</Surname>
+<GivenName>REYES</GivenName>
+<GivenName>SVITLANA</GivenName> <MiddleInitial>J</MiddleInitial> <Surname>MANDZY</Surname>
+<GivenName>Sarita</GivenName> <MiddleInitial>V.</MiddleInitial> <Surname>Adve</Surname>
+<GivenName>Tracy</GivenName> <Nickname>"T-Mac"</Nickname> <Surname>McGrady</Surname>
+<GivenName>bill</GivenName> <And>7</And> <GivenName>bev</GivenName> <Surname>campion</Surname>
+<GivenName>carlton</GivenName> <MiddleInitial>r</MiddleInitial> <Surname>marcyan,</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>chris</GivenName> <And>and</And> <GivenName>Jaydee</GivenName> <Surname>Smith</Surname>
+<GivenName>demetrios</GivenName> <Surname>stavrianos,</Surname>
+<GivenName>harry</GivenName> <MiddleName>c</MiddleName> <Surname>piper</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>joseph</GivenName> <And>&</And> <GivenName>golnar</GivenName> <Surname>phillips</Surname>
+<GivenName>ray</GivenName> <LastInitial>p</LastInitial>
+<LastInitial>S,</LastInitial> <GivenName>Kim</GivenName>
+<PrefixMarital>Miss</PrefixMarital> <GivenName>MARIETTA</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>ABALOS</Surname> <Surname>GALITO</Surname>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>George</GivenName> <MiddleInitial>W.</MiddleInitial> <Surname>Walker,</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>Max</GivenName> <Surname>McGlamry</Surname>
+<PrefixMarital>Mrs.</PrefixMarital> <GivenName>Larry</GivenName> <Surname>Bessinger</Surname>
+<PrefixMarital>Ms.</PrefixMarital> <GivenName>Carolyn</GivenName> <Surname>Davenport</Surname>
+<PrefixOther>Dr.</PrefixOther> <GivenName>George</GivenName> <Surname>Snelling</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <GivenName>Hugh</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>smisson</Surname> <SuffixGenerational>Jr.</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <Surname>Gomes</Surname> <And>&</And> <PrefixOther>Dr.</PrefixOther> <Surname>Lui</Surname>
+<PrefixOther>State</PrefixOther> <PrefixOther>Senator</PrefixOther> <GivenName>Kwame</GivenName> <Surname>Raoul</Surname>
+<PrefixOther>father</PrefixOther> <GivenName>michael</GivenName> <Surname>pfleger</Surname>
+<Surname>COOPER</Surname>
+<Surname>HARPOOL,</Surname> <FirstInitial>M.</FirstInitial> <MiddleName>DOUGLAS</MiddleName>
+<Surname>KING,</Surname> <GivenName>JO</GivenName> <GivenName>ANN</GivenName> <And>and</And> <GivenName>DAVID</GivenName>
+<Surname>Russell,</Surname> <GivenName>Herman</GivenName>
+<Surname>TROJAN,</Surname> <SuffixOther>BSN,</SuffixOther> <SuffixOther>RN,</SuffixOther> <SuffixOther>LNCC,</SuffixOther> <GivenName>CHRISTINE</GivenName>
+
+Observe that entities only include non-space characters and can only start and end on whitespace;
+comma "," can be used to reverse the order of given name vs surname;
+a single-word name may very well represent a surname rather than a given name;
+name prefixes and suffixes can be added for marital status, generation, education, profession etc.;
+initials and nicknames can be used instead, or in addition to, given names and surnames;
+"&" and "and" entities can be used to join multiple names (given names, surnames) on a single line;
+"Mr" should be treated as PrefixMarital not Other.
+
+Now, when you understand the rules, parse the following list of raw names and output corresponding annotations.
+Do NOT output anything else: no description, no line numbers, no bullet points. Do NOT insert any extra
+characters to the raw text inside annotations, nor change existing raw characters. Input names:
+
+Robert J. Michelich, DDS
+Chunyi Peng
+EDMOND
+Kevin O'Neal, MD
+Padron Andrea
+Drew McDermott
+patty and bill laskaris
+Yalin Wang
+MASSEY
+CARIDAD
+william n. wood prince
+Christine A. Trojan, BSN, RN,
+Sebastian Seung
+Jim B.
+DR. Charles Lamback, Sr.
+Dan and Lilly Immergluck
+HARRIS
+HODGE
+Tio Hardiman & Brunell Donald
+GINO
+HARRIETTE
+STRICKLAND
+Charalampos (Babis) Papamanthou
+FREDDY
+SOLOMON
+Sariel Har-Peled
+MILLARD
+NORRIS
+CAMPOS
+GARNER
+
+
+
+Output:
+<GivenName>Robert</GivenName> <MiddleInitial>J.</MiddleInitial> <Surname>Michelich,</Surname> <SuffixOther>DDS</SuffixOther>
+<GivenName>Chunyi</GivenName> <Surname>Peng</Surname>
+<GivenName>EDMOND</GivenName>
+<GivenName>Kevin</GivenName> <MiddleInitial>O.</MiddleInitial> <Surname>Neal,</Surname> <SuffixOther>MD</SuffixOther>
+<GivenName>Padron</GivenName> <Surname>Andrea</Surname>
+<GivenName>Drew</GivenName> <Surname>McDermott</Surname>
+<GivenName>patty</GivenName> <And>and</And> <GivenName>bill</GivenName> <Surname>laskaris</Surname>
+<GivenName>Yalin</GivenName> <Surname>Wang</Surname>
+<GivenName>MASSEY</GivenName>
+<GivenName>CARIDAD</GivenName>
+<GivenName>william</GivenName> <MiddleInitial>n.</MiddleInitial> <GivenName>wood</GivenName> <Surname>prince</Surname>
+<GivenName>Christine</GivenName> <MiddleInitial>A.</MiddleInitial> <Surname>Trojan,</Surname> <SuffixGenerational>BSN,</SuffixGenerational> <SuffixGenerational>RN,</SuffixGenerational>
+<GivenName>Sebastian</GivenName> <Surname>Seung</Surname>
+<GivenName>Jim</GivenName> <MiddleInitial>B.</MiddleInitial>
+<PrefixOther>DR.</PrefixOther> <GivenName>Charles</GivenName> <Surname>Lamback,</Surname> <SuffixGenerational>Sr.</SuffixGenerational>
+<GivenName>Dan</GivenName> <And>and</And> <GivenName>Lilly</GivenName> <Surname>Immergluck</Surname>
+<GivenName>HARRIS</GivenName>
+<GivenName>HODGE</GivenName>
+<GivenName>Tio</GivenName> <Surname>Hardiman</Surname> <And>&</And> <GivenName>Brunell</GivenName> <Surname>Donald</Surname>
+<GivenName>GINO</GivenName>
+<GivenName>HARRIETTE</GivenName>
+<GivenName>STRICKLAND</GivenName>
+<GivenName>Charalampos</GivenName> <Nickname>(Babis)</Nickname> <Surname>Papamanthou</Surname>
+<GivenName>FREDDY</GivenName>
+<GivenName>SOLOMON</GivenName>
+<GivenName>Sariel</GivenName> <Surname>Har-Peled</Surname>
+<GivenName>MILLARD</GivenName>
+<GivenName>NORRIS</GivenName>
+<GivenName>CAMPOS</GivenName>
+<GivenName>GARNER</GivenName>
+
+
+Time elapsed: 10.13 seconds
+
+Parsing batch starting at 270...
+
+Prompt (5596 characters, approx. 1865 tokens):
+
+You are a Named Entity Recognition (NER) tool that takes person names on input and adds XML annotations for
+different parts of the name: given name, surname, initials etc. You are allowed to use the following entities:
+GivenName, MiddleName, Surname, FirstInitial, MiddleInitial, LastInitial, Nickname, PrefixMarital, PrefixOther,
+SuffixGenerational, SuffixOther, And.
+Every subsequence of 1+ non-whitespace characters in a line must be annotated with an entity from the above list.
+Example output:
+
+<FirstInitial>A.</FirstInitial> <MiddleName>Richard</MiddleName> <Surname>Royal</Surname>
+<FirstInitial>C.R.</FirstInitial> <Surname>Ramakrishnan</Surname>
+<FirstInitial>R.</FirstInitial> <Surname>Sekar</Surname>
+<FirstInitial>W.</FirstInitial> <MiddleName>Bruce</MiddleName> <Surname>Croft</Surname>
+<GivenName>Arthur</GivenName> <Surname>Gray,</Surname> <SuffixGenerational>Jr.,</SuffixGenerational> <SuffixOther>M.D.</SuffixOther>
+<GivenName>Brandon</GivenName> <LastInitial>R.</LastInitial>
+<GivenName>Chenyang</GivenName> <LastInitial>Lu</LastInitial>
+<GivenName>Earl</GivenName> <Nickname>"The</Nickname> <Nickname>Goat"</Nickname> <Surname>Manigault</Surname>
+<GivenName>Elaheh</GivenName> <Nickname>(Eli)</Nickname> <Surname>Bozorgzadeh</Surname>
+<GivenName>Elizabeth</GivenName> <LastInitial>B</LastInitial>
+<GivenName>Florence</GivenName> <MiddleName>Carsley</MiddleName> <Surname>Barnett,</Surname> <SuffixOther>MD</SuffixOther>
+<GivenName>James</GivenName> <Nickname>"Mike"</Nickname> <Surname>Dyer</Surname> <SuffixGenerational>Sr.</SuffixGenerational>
+<GivenName>Mukesh</GivenName> <Nickname>"Tommy"</Nickname> <Surname>Patel</Surname>
+<GivenName>REYES</GivenName>
+<GivenName>SVITLANA</GivenName> <MiddleInitial>J</MiddleInitial> <Surname>MANDZY</Surname>
+<GivenName>Sarita</GivenName> <MiddleInitial>V.</MiddleInitial> <Surname>Adve</Surname>
+<GivenName>Tracy</GivenName> <Nickname>"T-Mac"</Nickname> <Surname>McGrady</Surname>
+<GivenName>bill</GivenName> <And>7</And> <GivenName>bev</GivenName> <Surname>campion</Surname>
+<GivenName>carlton</GivenName> <MiddleInitial>r</MiddleInitial> <Surname>marcyan,</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>chris</GivenName> <And>and</And> <GivenName>Jaydee</GivenName> <Surname>Smith</Surname>
+<GivenName>demetrios</GivenName> <Surname>stavrianos,</Surname>
+<GivenName>harry</GivenName> <MiddleName>c</MiddleName> <Surname>piper</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+<GivenName>joseph</GivenName> <And>&</And> <GivenName>golnar</GivenName> <Surname>phillips</Surname>
+<GivenName>ray</GivenName> <LastInitial>p</LastInitial>
+<LastInitial>S,</LastInitial> <GivenName>Kim</GivenName>
+<PrefixMarital>Miss</PrefixMarital> <GivenName>MARIETTA</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>ABALOS</Surname> <Surname>GALITO</Surname>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>George</GivenName> <MiddleInitial>W.</MiddleInitial> <Surname>Walker,</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>Max</GivenName> <Surname>McGlamry</Surname>
+<PrefixMarital>Mrs.</PrefixMarital> <GivenName>Larry</GivenName> <Surname>Bessinger</Surname>
+<PrefixMarital>Ms.</PrefixMarital> <GivenName>Carolyn</GivenName> <Surname>Davenport</Surname>
+<PrefixOther>Dr.</PrefixOther> <GivenName>George</GivenName> <Surname>Snelling</Surname> <SuffixGenerational>III</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <GivenName>Hugh</GivenName> <MiddleInitial>F</MiddleInitial> <Surname>smisson</Surname> <SuffixGenerational>Jr.</SuffixGenerational>
+<PrefixOther>Dr.</PrefixOther> <Surname>Gomes</Surname> <And>&</And> <PrefixOther>Dr.</PrefixOther> <Surname>Lui</Surname>
+<PrefixOther>State</PrefixOther> <PrefixOther>Senator</PrefixOther> <GivenName>Kwame</GivenName> <Surname>Raoul</Surname>
+<PrefixOther>father</PrefixOther> <GivenName>michael</GivenName> <Surname>pfleger</Surname>
+<Surname>COOPER</Surname>
+<Surname>HARPOOL,</Surname> <FirstInitial>M.</FirstInitial> <MiddleName>DOUGLAS</MiddleName>
+<Surname>KING,</Surname> <GivenName>JO</GivenName> <GivenName>ANN</GivenName> <And>and</And> <GivenName>DAVID</GivenName>
+<Surname>Russell,</Surname> <GivenName>Herman</GivenName>
+<Surname>TROJAN,</Surname> <SuffixOther>BSN,</SuffixOther> <SuffixOther>RN,</SuffixOther> <SuffixOther>LNCC,</SuffixOther> <GivenName>CHRISTINE</GivenName>
+
+Observe that entities only include non-space characters and can only start and end on whitespace;
+comma "," can be used to reverse the order of given name vs surname;
+a single-word name may very well represent a surname rather than a given name;
+name prefixes and suffixes can be added for marital status, generation, education, profession etc.;
+initials and nicknames can be used instead, or in addition to, given names and surnames;
+"&" and "and" entities can be used to join multiple names (given names, surnames) on a single line;
+"Mr" should be treated as PrefixMarital not Other.
+
+Now, when you understand the rules, parse the following list of raw names and output corresponding annotations.
+Do NOT output anything else: no description, no line numbers, no bullet points. Do NOT insert any extra
+characters to the raw text inside annotations, nor change existing raw characters. Input names:
+
+DEAN
+MERCER
+HAHN
+MALONE
+ARNOLD
+LE
+ANGELES
+ELLIS
+DAN SLADE
+CHAPMAN
+Shrikanth (Shri) S. Narayanan
+FLOYD
+Paola I., M.D.
+
+
+
+Output:
+<Surname>DEAN</Surname>
+<Surname>MERCER</Surname>
+<Surname>HAHN</Surname>
+<Surname>MALONE</Surname>
+<Surname>ARNOLD</Surname>
+<Surname>LE</Surname>
+<Surname>ANGELES</Surname>
+<Surname>ELLIS</Surname>
+<GivenName>DAN</GivenName> <Surname>SLADE</Surname>
+<Surname>CHAPMAN</Surname>
+<GivenName>Shrikanth</GivenName> <Nickname>(Shri)</Nickname> <MiddleInitial>S.</MiddleInitial> <Surname>Narayanan</Surname>
+<Surname>FLOYD</Surname>
+<GivenName>Paola</GivenName> <Initial>I.</Initial> <SuffixOther>M.D.</SuffixOther>
+
+
+Time elapsed: 2.95 seconds
+
+
+Predictions (283) vs Targets (283):
+
+pred:  <GivenName>Larry</GivenName> <Nickname>"Mr. Mean"</Nickname> <Surname>Smith</Surname>
+true:  <GivenName>Larry</GivenName> <Nickname>"Mr.</Nickname> <Nickname>Mean"</Nickname> <Surname>Smith</Surname>
+
+pred:  <GivenName>KIA</GivenName>
+true:  <GivenName>KIA</GivenName>
+
+pred:  <GivenName>MERIDETH</GivenName>
+true:  <GivenName>MERIDETH</GivenName>
+
+pred:  <GivenName>BARRETT</GivenName>
+true:  <Surname>BARRETT</Surname>
+
+pred:  <GivenName>Le</GivenName> <Surname>Song</Surname>
+true:  <GivenName>Le</GivenName> <Surname>Song</Surname>
+
+pred:  <GivenName>Xiaohui</GivenName> <Nickname>(Helen)</Nickname> <Surname>Gu</Surname>
+true:  <GivenName>Xiaohui</GivenName> <Nickname>(Helen)</Nickname> <Surname>Gu</Surname>
+
+pred:  <GivenName>Robert</GivenName> <MiddleInitial>P</MiddleInitial> <Surname>Dick</Surname>
+true:  <GivenName>Robert</GivenName> <MiddleInitial>P</MiddleInitial> <Surname>Dick</Surname>
+
+pred:  <PrefixMarital>Mrs.</PrefixMarital> <GivenName>Virginia</GivenName> <MiddleInitial>B.</MiddleInitial> <Surname>Tate</Surname>
+true:  <PrefixMarital>Mrs.</PrefixMarital> <GivenName>Virginia</GivenName> <MiddleInitial>B.</MiddleInitial> <Surname>Tate</Surname>
+
+pred:  <GivenName>Yejin</GivenName> <Surname>Choi</Surname>
+true:  <GivenName>Yejin</GivenName> <Surname>Choi</Surname>
+
+pred:  <GivenName>STEPHEN</GivenName> <MiddleInitial>H</MiddleInitial> <Surname>DYSON</Surname>
+true:  <GivenName>STEPHEN</GivenName> <MiddleInitial>H</MiddleInitial> <Surname>DYSON</Surname>
+
+pred:  <GivenName>MARKS</GivenName>
+true:  <Surname>MARKS</Surname>
+
+pred:  <GivenName>Joseph</GivenName> <Surname>DePew</Surname>
+true:  <GivenName>Joseph</GivenName> <Surname>DePew</Surname>
+
+pred:  <GivenName>David</GivenName> <MiddleInitial>M</MiddleInitial> <Surname>Lahasky,</Surname> <SuffixOther>MD</SuffixOther>
+true:  <GivenName>David</GivenName> <MiddleInitial>M</MiddleInitial> <Surname>Lahasky,</Surname> <SuffixOther>MD</SuffixOther>
+
+pred:  <GivenName>MEHRZAD</GivenName> <Surname>SERAJI</Surname>
+true:  <GivenName>MEHRZAD</GivenName> <Surname>SERAJI</Surname>
+
+pred:  <GivenName>FLORES</GivenName>
+true:  <Surname>FLORES</Surname>
+
+pred:  <GivenName>CLEMENTE</GivenName>
+true:  <GivenName>CLEMENTE</GivenName>
+
+pred:  <GivenName>EDGARDO</GivenName>
+true:  <GivenName>EDGARDO</GivenName>
+
+pred:  <GivenName>ACEVEDO</GivenName>
+true:  <Surname>ACEVEDO</Surname>
+
+pred:  <GivenName>REED</GivenName>
+true:  <Surname>REED</Surname>
+
+pred:  <GivenName>DORTHEY</GivenName>
+true:  <GivenName>DORTHEY</GivenName>
+
+pred:  <GivenName>BRETT</GivenName>
+true:  <GivenName>BRETT</GivenName>
+
+pred:  <GivenName>ERWIN</GivenName>
+true:  <GivenName>ERWIN</GivenName>
+
+pred:  <GivenName>WHITE</GivenName>
+true:  <Surname>WHITE</Surname>
+
+pred:  <GivenName>Peter</GivenName> <Surname>Stone</Surname>
+true:  <GivenName>Peter</GivenName> <Surname>Stone</Surname>
+
+pred:  <GivenName>Ninghui</GivenName> <Surname>Li</Surname>
+true:  <GivenName>Ninghui</GivenName> <Surname>Li</Surname>
+
+pred:  <GivenName>ARMSTRONG</GivenName>
+true:  <Surname>ARMSTRONG</Surname>
+
+pred:  <GivenName>Victoria</GivenName> <MiddleName>Lynn</MiddleName> <Surname>Clements,</Surname> <SuffixOther>D.O.</SuffixOther>
+true:  <GivenName>Victoria</GivenName> <MiddleName>Lynn</MiddleName> <Surname>Clements,</Surname> <SuffixOther>D.O.</SuffixOther>
+
+pred:  <GivenName>Christine</GivenName> <Surname>Neuwirth</Surname>
+true:  <GivenName>Christine</GivenName> <Surname>Neuwirth</Surname>
+
+pred:  <GivenName>PACE</GivenName>
+true:  <Surname>PACE</Surname>
+
+pred:  <GivenName>LARAE</GivenName>
+true:  <GivenName>LARAE</GivenName>
+
+pred:  <PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>Marc</GivenName> <Surname>Olivie</Surname>
+true:  <PrefixMarital>Mr.</PrefixMarital> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>Marc</GivenName> <Surname>Olivie</Surname>
+
+pred:  <GivenName>Michael</GivenName> <MiddleInitial>J</MiddleInitial> <Surname>Cafarella</Surname>
+true:  <GivenName>Michael</GivenName> <MiddleInitial>J.</MiddleInitial> <Surname>Cafarella</Surname>
+
+pred:  <PrefixMarital>Mr.</PrefixMarital> <GivenName>James</GivenName> <MiddleInitial>O</MiddleInitial> <Surname>Davis</Surname>
+true:  <PrefixMarital>Mr</PrefixMarital> <GivenName>James</GivenName> <MiddleInitial>O</MiddleInitial> <Surname>Davis</Surname>
+
+pred:  <GivenName>PUENTE</GivenName> <Surname>KILLIAN,</Surname> <GivenName>CHRISTINE</GivenName> <MiddleInitial>E</MiddleInitial>
+true:  <Surname>PUENTE</Surname> <Surname>KILLIAN,</Surname> <GivenName>CHRISTINE</GivenName> <MiddleInitial>E</MiddleInitial>
+
+pred:  <GivenName>Melody</GivenName> <Surname>Jackson</Surname>
+true:  <GivenName>Melody</GivenName> <Surname>Jackson</Surname>
+
+pred:  <GivenName>Paul</GivenName> <Surname>Chialdikas</Surname>
+true:  <GivenName>Paul</GivenName> <Surname>Chialdikas</Surname>
+
+pred:  <GivenName>j</GivenName> <MiddleName>louise</MiddleName> <Surname>dietzen</Surname>
+true:  <FirstInitial>j</FirstInitial> <MiddleName>louise</MiddleName> <Surname>dietzen</Surname>
+
+pred:  <PrefixOther>Dr.</PrefixOther> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>BINNO</GivenName> <Surname>DHAR</Surname> <SuffixOther>M.D.</SuffixOther>
+true:  <PrefixOther>Dr.</PrefixOther> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>BINNO</GivenName> <Surname>DHAR</Surname> <SuffixOther>M.D.</SuffixOther>
+
+pred:  <GivenName>KATHERN</GivenName>
+true:  <GivenName>KATHERN</GivenName>
+
+pred:  <GivenName>LLOYD</GivenName>
+true:  <Surname>LLOYD</Surname>
+
+pred:  <Surname>QUINN,</Surname> <GivenName>KEVIN</GivenName> <MiddleInitial>R</MiddleInitial>
+true:  <Surname>QUINN,</Surname> <GivenName>KEVIN</GivenName> <MiddleInitial>R</MiddleInitial>
+
+pred:  <GivenName>Liqing</GivenName> <Surname>Zhang</Surname>
+true:  <GivenName>Liqing</GivenName> <Surname>Zhang</Surname>
+
+pred:  <GivenName>John</GivenName> <Surname>Zahorjan</Surname>
+true:  <GivenName>John</GivenName> <Surname>Zahorjan</Surname>
+
+pred:  <GivenName>DURAN</GivenName>
+true:  <Surname>DURAN</Surname>
+
+pred:  <GivenName>BURMA</GivenName>
+true:  <GivenName>BURMA</GivenName>
+
+pred:  <GivenName>Curtis</GivenName> <Surname>Martin</Surname> <SuffixGenerational>II</SuffixGenerational>
+true:  <GivenName>Curtis</GivenName> <Surname>Martin</Surname> <SuffixGenerational>II</SuffixGenerational>
+
+pred:  <GivenName>Mark</GivenName> <MiddleInitial>O.</MiddleInitial> <Surname>Bernardy</Surname>
+true:  <GivenName>Mark</GivenName> <MiddleInitial>O.</MiddleInitial> <Surname>Bernardy</Surname>
+
+pred:  <GivenName>Martin</GivenName> <Surname>Stein</Surname>
+true:  <GivenName>Martin</GivenName> <Surname>Stein</Surname>
+
+pred:  <Surname>GLASS</Surname>
+true:  <Surname>GLASS</Surname>
+
+pred:  <Surname>QUEEN</Surname>
+true:  <GivenName>QUEEN</GivenName>
+
+pred:  <GivenName>BRUCE</GivenName> <MiddleInitial>D</MiddleInitial> <Surname>WARDINSKI</Surname>
+true:  <GivenName>BRUCE</GivenName> <MiddleInitial>D</MiddleInitial> <Surname>WARDINSKI</Surname>
+
+pred:  <GivenName>PENA</GivenName>
+true:  <Surname>PENA</Surname>
+
+pred:  <GivenName>Honglak</GivenName> <Surname>Lee</Surname>
+true:  <GivenName>Honglak</GivenName> <Surname>Lee</Surname>
+
+pred:  <GivenName>Michelle</GivenName> <Surname>Terrette</Surname>
+true:  <GivenName>Michelle</GivenName> <Surname>Terrette</Surname>
+
+pred:  <GivenName>BRITT</GivenName>
+true:  <GivenName>BRITT</GivenName>
+
+pred:  <GivenName>GRACE</GivenName>
+true:  <GivenName>GRACE</GivenName>
+
+pred:  <GivenName>MC</GivenName> <MiddleInitial>DERMOTT,</MiddleInitial> <GivenName>KEITH</GivenName> <MiddleInitial>J</MiddleInitial>
+true:  <Surname>MC</Surname> <Surname>DERMOTT,</Surname> <GivenName>KEITH</GivenName> <MiddleInitial>J</MiddleInitial>
+
+pred:  <GivenName>CHASE</GivenName>
+true:  <GivenName>CHASE</GivenName>
+
+pred:  <GivenName>C.</GivenName> <MiddleInitial>D.</MiddleInitial> <Surname>Glin</Surname>
+true:  <FirstInitial>C.</FirstInitial> <MiddleInitial>D.</MiddleInitial> <Surname>Glin</Surname>
+
+pred:  <GivenName>Koray</GivenName> <Surname>Aydin</Surname>
+true:  <GivenName>Koray</GivenName> <Surname>Aydin</Surname>
+
+pred:  <GivenName>WARREN</GivenName>
+true:  <Surname>WARREN</Surname>
+
+pred:  <GivenName>KLINE</GivenName>
+true:  <Surname>KLINE</Surname>
+
+pred:  <GivenName>SIMS</GivenName>
+true:  <Surname>SIMS</Surname>
+
+pred:  <GivenName>HEATH</GivenName>
+true:  <GivenName>HEATH</GivenName>
+
+pred:  <GivenName>David</GivenName> <MiddleInitial>O.</MiddleInitial> <Surname>Woodruff</Surname>
+true:  <GivenName>David</GivenName> <MiddleInitial>O.</MiddleInitial> <Surname>Woodruff</Surname>
+
+pred:  <GivenName>John</GivenName> <MiddleName>Rex</MiddleName> <Surname>Fuqua</Surname>
+true:  <GivenName>John</GivenName> <MiddleName>Rex</MiddleName> <Surname>Fuqua</Surname>
+
+pred:  <GivenName>MOORE</GivenName>
+true:  <Surname>MOORE</Surname>
+
+pred:  <GivenName>Wim</GivenName> <Surname>van</Surname> <Surname>Dam</Surname>
+true:  <GivenName>Wim</GivenName> <Surname>van</Surname> <Surname>Dam</Surname>
+
+pred:  <GivenName>John</GivenName> <Surname>Smith,</Surname> <SuffixGenerational>II</SuffixGenerational>
+true:  <GivenName>John</GivenName> <Surname>Smith,</Surname> <SuffixGenerational>II</SuffixGenerational>
+
+pred:  <GivenName>EASTER</GivenName>
+true:  <GivenName>EASTER</GivenName>
+
+pred:  <GivenName>James</GivenName> <MiddleInitial>R.</MiddleInitial> <Surname>Lee</Surname>
+true:  <GivenName>James</GivenName> <MiddleInitial>R.</MiddleInitial> <Surname>Lee</Surname>
+
+pred:  <GivenName>Jianxiong</GivenName> <Surname>Xiao</Surname>
+true:  <GivenName>Jianxiong</GivenName> <Surname>Xiao</Surname>
+
+pred:  <GivenName>Hector</GivenName> <Surname>Corrada</Surname> <Surname>Bravo</Surname>
+true:  <GivenName>Hector</GivenName> <MiddleName>Corrada</MiddleName> <Surname>Bravo</Surname>
+
+pred:  <GivenName>Jason</GivenName> <Surname>Hong</Surname>
+true:  <GivenName>Jason</GivenName> <Surname>Hong</Surname>
+
+pred:  <GivenName>KIZZY</GivenName>
+true:  <GivenName>KIZZY</GivenName>
+
+pred:  <GivenName>Charles</GivenName> <And>and</And> <GivenName>jean</GivenName> <Surname>dukes</Surname>
+true:  <GivenName>Charles</GivenName> <And>and</And> <GivenName>jean</GivenName> <Surname>dukes</Surname>
+
+pred:  <PrefixOther>Rev</PrefixOther> <GivenName>John</GivenName> <Surname>Piper</Surname>
+true:  <PrefixOther>Rev</PrefixOther> <GivenName>John</GivenName> <Surname>Piper</Surname>
+
+pred:  <GivenName>Jeffrey</GivenName> <Surname>Bigham</Surname>
+true:  <GivenName>Jeffrey</GivenName> <Surname>Bigham</Surname>
+
+pred:  <GivenName>john</GivenName> <Surname>puthesseril</Surname>
+true:  <GivenName>john</GivenName> <Surname>puthesseril</Surname>
+
+pred:  <GivenName>BOK</GivenName>
+true:  <GivenName>BOK</GivenName>
+
+pred:  <GivenName>TOSHIKO</GivenName>
+true:  <GivenName>TOSHIKO</GivenName>
+
+pred:  <GivenName>ORTEGA</GivenName>
+true:  <Surname>ORTEGA</Surname>
+
+pred:  <GivenName>EDWARD</GivenName> <MiddleInitial>JAY</MiddleInitial> <Surname>POLLYEA</Surname>
+true:  <GivenName>EDWARD</GivenName> <MiddleName>JAY</MiddleName> <Surname>POLLYEA</Surname>
+
+pred:  <GivenName>STEELE</GivenName>
+true:  <Surname>STEELE</Surname>
+
+pred:  <GivenName>FRANK</GivenName> <MiddleInitial>W.</MiddleInitial> <Surname>ROGERS,</Surname> <SuffixGenerational>JR.</SuffixGenerational>
+true:  <GivenName>FRANK</GivenName> <MiddleInitial>W.</MiddleInitial> <Surname>ROGERS,</Surname> <SuffixGenerational>JR.</SuffixGenerational>
+
+pred:  <GivenName>GLADYS</GivenName>
+true:  <GivenName>GLADYS</GivenName>
+
+pred:  <GivenName>CAROLYNN</GivenName>
+true:  <GivenName>CAROLYNN</GivenName>
+
+pred:  <GivenName>KRAUSE</GivenName>
+true:  <Surname>KRAUSE</Surname>
+
+pred:  <GivenName>Swastik</GivenName> <Surname>Kopparty</Surname>
+true:  <GivenName>Swastik</GivenName> <Surname>Kopparty</Surname>
+
+pred:  <GivenName>Madelyn</GivenName> <Surname>Van</Surname> <Surname>Dyke</Surname>
+true:  <GivenName>Madelyn</GivenName> <Surname>Van</Surname> <Surname>Dyke</Surname>
+
+pred:  <GivenName>Thaddeus</GivenName> <Surname>Lynn,</Surname> <SuffixOther>MD</SuffixOther>
+true:  <GivenName>Thaddeus</GivenName> <Surname>Lynn,</Surname> <SuffixOther>MD</SuffixOther>
+
+pred:  <GivenName>David</GivenName> <MiddleInitial>I.</MiddleInitial> <Surname>Zuckerman</Surname>
+true:  <GivenName>David</GivenName> <MiddleInitial>I.</MiddleInitial> <Surname>Zuckerman</Surname>
+
+pred:  <GivenName>Chang</GivenName> <Surname>Liu</Surname>
+true:  <GivenName>Chang</GivenName> <Surname>Liu</Surname>
+
+pred:  <GivenName>Rupert</GivenName> <Surname>Barkoff</Surname>
+true:  <GivenName>Rupert</GivenName> <Surname>Barkoff</Surname>
+
+pred:  <GivenName>IAN</GivenName> <Surname>GERRARD</Surname>
+true:  <GivenName>IAN</GivenName> <Surname>GERRARD</Surname>
+
+pred:  <GivenName>FLAVIA</GivenName>
+true:  <GivenName>FLAVIA</GivenName>
+
+pred:  <GivenName>krishnamurthy</GivenName> <Surname>rao</Surname>
+true:  <GivenName>krishnamurthy</GivenName> <Surname>rao</Surname>
+
+pred:  <GivenName>Emmett</GivenName> <Surname>Voorhees</Surname>
+true:  <GivenName>Emmett</GivenName> <Surname>Voorhees</Surname>
+
+pred:  <GivenName>Calton</GivenName> <Surname>Pu</Surname>
+true:  <GivenName>Calton</GivenName> <Surname>Pu</Surname>
+
+pred:  <GivenName>DAVID</GivenName> <MiddleInitial>W.</MiddleInitial> <Surname>FLYNN</Surname>
+true:  <GivenName>DAVID</GivenName> <MiddleInitial>W</MiddleInitial> <Surname>FLYNN</Surname>
+
+pred:  <GivenName>SOOK</GivenName>
+true:  <GivenName>SOOK</GivenName>
+
+pred:  <GivenName>ROSADO,</GivenName> <GivenName>LUZ</GivenName> <Surname>N</Surname>
+true:  <Surname>ROSADO,</Surname> <GivenName>LUZ</GivenName> <MiddleInitial>N</MiddleInitial>
+
+pred:  <GivenName>GEORGE</GivenName>
+true:  <Surname>GEORGE</Surname>
+
+pred:  <GivenName>Baggs,</GivenName> <Surname>Lawton</Surname>
+true:  <Surname>Baggs,</Surname> <GivenName>Lawton</GivenName>
+
+pred:  <GivenName>Lisa</GivenName> <Surname>Hsu</Surname>
+true:  <GivenName>Lisa</GivenName> <Surname>Hsu</Surname>
+
+pred:  <GivenName>Jane</GivenName> <Surname>Orr</Surname>
+true:  <GivenName>Jane</GivenName> <Surname>Orr</Surname>
+
+pred:  <GivenName>richard</GivenName> <Surname>arrandt</Surname> <SuffixOther>dc</SuffixOther>
+true:  <GivenName>richard</GivenName> <Surname>arrandt</Surname> <SuffixOther>dc</SuffixOther>
+
+pred:  <GivenName>Quentin</GivenName> <MiddleInitial>R.</MiddleInitial> <Surname>Pirkle,</Surname> <SuffixGenerational>Jr.,</SuffixGenerational> <SuffixOther>MD</SuffixOther>
+true:  <GivenName>Quentin</GivenName> <MiddleInitial>R.</MiddleInitial> <Surname>Pirkle,</Surname> <SuffixGenerational>Jr.,</SuffixGenerational> <SuffixOther>MD</SuffixOther>
+
+pred:  <GivenName>Long</GivenName> <Surname>Lu</Surname>
+true:  <GivenName>Long</GivenName> <Surname>Lu</Surname>
+
+pred:  <GivenName>BRYANT</GivenName>
+true:  <Surname>BRYANT</Surname>
+
+pred:  <GivenName>Craig</GivenName> <And>&</And> <GivenName>Sandy</GivenName> <Surname>Kubik</Surname>
+true:  <GivenName>Craig</GivenName> <And>&</And> <GivenName>Sandy</GivenName> <Surname>Kubik</Surname>
+
+pred:  <GivenName>SAVAGE</GivenName>
+true:  <Surname>SAVAGE</Surname>
+
+pred:  <GivenName>KNOX</GivenName>
+true:  <Surname>KNOX</Surname>
+
+pred:  <GivenName>BERGER</GivenName>
+true:  <Surname>BERGER</Surname>
+
+pred:  <GivenName>ONEILL</GivenName>
+true:  <Surname>ONEILL</Surname>
+
+pred:  <GivenName>SNOW</GivenName>
+true:  <Surname>SNOW</Surname>
+
+pred:  <PrefixMarital>Ms.</PrefixMarital> <GivenName>KELLI</GivenName> <GivenName>KAY</GivenName> <Surname>HORTON</Surname> <Surname>ANDERSON</Surname>
+true:  <PrefixMarital>Ms.</PrefixMarital> <GivenName>KELLI</GivenName> <MiddleName>KAY</MiddleName> <Surname>HORTON</Surname> <Surname>ANDERSON</Surname>
+
+pred:  <GivenName>Joan</GivenName> <Surname>Dokson</Surname>
+true:  <GivenName>Joan</GivenName> <Surname>Dokson</Surname>
+
+pred:  <GivenName>CLAY</GivenName>
+true:  <Surname>CLAY</Surname>
+
+pred:  <GivenName>Lee</GivenName> <MiddleInitial>P.</MiddleInitial>
+true:  <GivenName>Lee</GivenName> <LastInitial>P.</LastInitial>
+
+pred:  <GivenName>RANGEL</GivenName>
+true:  <Surname>RANGEL</Surname>
+
+pred:  <GivenName>Matthew</GivenName> <MiddleInitial>B.</MiddleInitial>
+true:  <GivenName>Matthew</GivenName> <LastInitial>B.</LastInitial>
+
+pred:  <GivenName>VALARIE</GivenName>
+true:  <GivenName>VALARIE</GivenName>
+
+pred:  <GivenName>Matthew</GivenName> <MiddleInitial>B.</MiddleInitial>
+true:  <GivenName>Matthew</GivenName> <LastInitial>B.</LastInitial>
+
+pred:  <GivenName>Christine</GivenName> <MiddleName>Soares</MiddleName> <Surname>Cox</Surname>
+true:  <GivenName>Christine</GivenName> <MiddleName>Soares</MiddleName> <Surname>Cox</Surname>
+
+pred:  <GivenName>GARFIELD</GivenName>
+true:  <GivenName>GARFIELD</GivenName>
+
+pred:  <GivenName>Guoliang</GivenName> <Surname>Xue</Surname>
+true:  <GivenName>Guoliang</GivenName> <Surname>Xue</Surname>
+
+pred:  <GivenName>HUANG</GivenName>
+true:  <Surname>HUANG</Surname>
+
+pred:  <GivenName>Jean</GivenName> <MiddleName>Van</MiddleName> <Surname>der</Surname> <Surname>Sommen</Surname>
+true:  <GivenName>Jean</GivenName> <Surname>Van</Surname> <Surname>der</Surname> <Surname>Sommen</Surname>
+
+pred:  <GivenName>Randi</GivenName> <Surname>Poole</Surname>
+true:  <GivenName>Randi</GivenName> <Surname>Poole</Surname>
+
+pred:  <GivenName>SCHWARTZ</GivenName>
+true:  <Surname>SCHWARTZ</Surname>
+
+pred:  <GivenName>raymondd</GivenName> <Surname>prybill</Surname>
+true:  <GivenName>raymondd</GivenName> <Surname>prybill</Surname>
+
+pred:  <GivenName>KAUFMAN</GivenName>
+true:  <Surname>KAUFMAN</Surname>
+
+pred:  <GivenName>Shubhangi</GivenName> <Surname>Saraf</Surname>
+true:  <GivenName>Shubhangi</GivenName> <Surname>Saraf</Surname>
+
+pred:  <GivenName>Chandrajit</GivenName> <Surname>Bajaj</Surname>
+true:  <GivenName>Chandrajit</GivenName> <Surname>Bajaj</Surname>
+
+pred:  <GivenName>sylvia</GivenName> <Surname>lam</Surname> <SuffixOther>mdsc</SuffixOther>
+true:  <GivenName>sylvia</GivenName> <Surname>lam</Surname> <SuffixOther>mdsc</SuffixOther>
+
+pred:  <GivenName>Wang-Chien</GivenName> <Surname>Lee</Surname>
+true:  <GivenName>Wang-Chien</GivenName> <Surname>Lee</Surname>
+
+pred:  <GivenName>WHITNEY</GivenName>
+true:  <GivenName>WHITNEY</GivenName>
+
+pred:  <GivenName>richard</GivenName> <MiddleInitial>a.</MiddleInitial> <Surname>shapiro</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+true:  <GivenName>richard</GivenName> <MiddleInitial>a.</MiddleInitial> <Surname>shapiro</Surname> <SuffixOther>attorney</SuffixOther> <SuffixOther>at</SuffixOther> <SuffixOther>law</SuffixOther>
+
+pred:  <GivenName>BARBARA</GivenName> <Surname>HILL</Surname>
+true:  <GivenName>BARBARA</GivenName> <Surname>HILL</Surname>
+
+pred:  <GivenName>DAVILA</GivenName>
+true:  <Surname>DAVILA</Surname>
+
+pred:  <GivenName>bulbul</GivenName> <And>&</And> <GivenName>vimal</GivenName> <Surname>bahuguna</Surname>
+true:  <GivenName>bulbul</GivenName> <And>&</And> <GivenName>vimal</GivenName> <Surname>bahuguna</Surname>
+
+pred:  <GivenName>ELOY</GivenName>
+true:  <GivenName>ELOY</GivenName>
+
+pred:  <PrefixOther>Dr.</PrefixOther> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>DERIC</GivenName> <MiddleInitial>C</MiddleInitial> <Surname>MCINTOSH</Surname>
+true:  <PrefixOther>Dr</PrefixOther> <And>&</And> <PrefixMarital>Mrs</PrefixMarital> <GivenName>DERIC</GivenName> <MiddleInitial>C</MiddleInitial> <Surname>MCINTOSH</Surname>
+
+pred:  <GivenName>FOLEY</GivenName>
+true:  <Surname>FOLEY</Surname>
+
+pred:  <GivenName>WILFORD</GivenName>
+true:  <GivenName>WILFORD</GivenName>
+
+pred:  <GivenName>BROOKE</GivenName>
+true:  <GivenName>BROOKE</GivenName>
+
+pred:  <GivenName>Sharon</GivenName> <Surname>Beasley</Surname> <Surname>Teague</Surname>
+true:  <GivenName>Sharon</GivenName> <MiddleName>Beasley</MiddleName> <Surname>Teague</Surname>
+
+pred:  <GivenName>Munmun</GivenName> <MiddleName>De</MiddleName> <Surname>Choudhury</Surname>
+true:  <GivenName>Munmun</GivenName> <Surname>De</Surname> <Surname>Choudhury</Surname>
+
+pred:  <GivenName>BRENNAN</GivenName>
+true:  <Surname>BRENNAN</Surname>
+
+pred:  <GivenName>CARTER</GivenName> <Surname>BARRETT</Surname>
+true:  <GivenName>CARTER</GivenName> <Surname>BARRETT</Surname>
+
+pred:  <Surname>DOUGLASS</Surname>
+true:  <GivenName>DOUGLASS</GivenName>
+
+pred:  <GivenName>RYAN</GivenName>
+true:  <Surname>RYAN</Surname>
+
+pred:  <GivenName>Yusu</GivenName> <Surname>Wang</Surname>
+true:  <GivenName>Yusu</GivenName> <Surname>Wang</Surname>
+
+pred:  <GivenName>Lui</GivenName> <Surname>Sha</Surname>
+true:  <GivenName>Lui</GivenName> <Surname>Sha</Surname>
+
+pred:  <Surname>CANNON</Surname>
+true:  <Surname>CANNON</Surname>
+
+pred:  <PrefixMarital>Ms.</PrefixMarital> <GivenName>NNEMDI</GivenName> <MiddleInitial>A</MiddleInitial> <Surname>BAIRD</Surname>
+true:  <PrefixMarital>Ms</PrefixMarital> <GivenName>NNEMDI</GivenName> <MiddleInitial>A</MiddleInitial> <Surname>BAIRD</Surname>
+
+pred:  <GivenName>KEITH</GivenName>
+true:  <Surname>KEITH</Surname>
+
+pred:  <GivenName>Munmun</GivenName> <Surname>De</Surname> <Surname>Choudhury</Surname>
+true:  <GivenName>Munmun</GivenName> <Surname>De</Surname> <Surname>Choudhury</Surname>
+
+pred:  <GivenName>Hugh</GivenName> <Surname>Sosebee,</Surname> <SuffixGenerational>Jr.</SuffixGenerational>
+true:  <GivenName>Hugh</GivenName> <Surname>Sosebee,</Surname> <SuffixGenerational>Jr.</SuffixGenerational>
+
+pred:  <Surname>NGUYEN</Surname>
+true:  <Surname>NGUYEN</Surname>
+
+pred:  <Surname>SLOAN</Surname>
+true:  <Surname>SLOAN</Surname>
+
+pred:  <Surname>DE</Surname> <Surname>LA</Surname> <Surname>TORRE,</Surname> <GivenName>MANUEL</GivenName>
+true:  <Surname>DE</Surname> <Surname>LA</Surname> <Surname>TORRE,</Surname> <GivenName>MANUEL</GivenName>
+
+pred:  <GivenName>Percy</GivenName> <Surname>Liang</Surname>
+true:  <GivenName>Percy</GivenName> <Surname>Liang</Surname>
+
+pred:  <GivenName>Alfonso</GivenName> <MiddleInitial>F.</MiddleInitial> <Surname>Cardenas</Surname>
+true:  <GivenName>Alfonso</GivenName> <MiddleInitial>F.</MiddleInitial> <Surname>Cardenas</Surname>
+
+pred:  <GivenName>COLLEEN</GivenName>
+true:  <GivenName>COLLEEN</GivenName>
+
+pred:  <GivenName>JEFFERSON</GivenName>
+true:  <GivenName>JEFFERSON</GivenName>
+
+pred:  <GivenName>RICHARD</GivenName> <Surname>NAYLOR</Surname>
+true:  <GivenName>RICHARD</GivenName> <Surname>NAYLOR</Surname>
+
+pred:  <GivenName>JAMISON</GivenName>
+true:  <GivenName>JAMISON</GivenName>
+
+pred:  <GivenName>EL</GivenName> <GivenName>AGATHE</GivenName> <GivenName>A</GivenName> <Surname>TEMBENG</Surname>
+true:  <GivenName>EL</GivenName> <GivenName>AGATHE</GivenName> <MiddleInitial>A</MiddleInitial> <Surname>TEMBENG</Surname>
+
+pred:  <GivenName>Mingyan</GivenName> <Surname>Liu</Surname>
+true:  <GivenName>Mingyan</GivenName> <Surname>Liu</Surname>
+
+pred:  <Surname>FUENTES</Surname>
+true:  <Surname>FUENTES</Surname>
+
+pred:  <GivenName>Edward</GivenName> <GivenName>Stephens</GivenName> <SuffixGenerational>SR</SuffixGenerational>
+true:  <GivenName>Edward</GivenName> <Surname>Stephens</Surname> <SuffixGenerational>SR</SuffixGenerational>
+
+pred:  <Surname>HOGAN</Surname>
+true:  <Surname>HOGAN</Surname>
+
+pred:  <GivenName>Stephen</GivenName> <Surname>Chong</Surname>
+true:  <GivenName>Stephen</GivenName> <Surname>Chong</Surname>
+
+pred:  <PrefixOther>Dr.</PrefixOther> <GivenName>Ralph</GivenName> <GivenName>D'Auria</GivenName>
+true:  <PrefixOther>Dr.</PrefixOther> <GivenName>Ralph</GivenName> <Surname>D'Auria</Surname>
+
+pred:  <GivenName>BARRY</GivenName> <GivenName>EVAN</GivenName> <Surname>WEINSTEIN</Surname>
+true:  <GivenName>BARRY</GivenName> <MiddleName>EVAN</MiddleName> <Surname>WEINSTEIN</Surname>
+
+pred:  <GivenName>Yung-Hsiang</GivenName> <Surname>Lu</Surname>
+true:  <GivenName>Yung-Hsiang</GivenName> <LastInitial>Lu</LastInitial>
+
+pred:  <GivenName>SARAI</GivenName>
+true:  <GivenName>SARAI</GivenName>
+
+pred:  <GivenName>VALERY</GivenName>
+true:  <GivenName>VALERY</GivenName>
+
+pred:  <GivenName>Josephine</GivenName> <Surname>Clingan</Surname> <Surname>M.D.</Surname>
+true:  <GivenName>Josephine</GivenName> <Surname>Clingan</Surname> <SuffixOther>M.D.</SuffixOther>
+
+pred:  <Surname>GRANT</Surname>
+true:  <GivenName>GRANT</GivenName>
+
+pred:  <Surname>ROSAMOND</Surname>
+true:  <GivenName>ROSAMOND</GivenName>
+
+pred:  <GivenName>DANIEL</GivenName> <Surname>MC</Surname> <Surname>NICHOLAS,</Surname> <Surname>D</Surname>
+true:  <Surname>MC</Surname> <Surname>NICHOLAS,</Surname> <GivenName>DANIEL</GivenName> <MiddleInitial>D</MiddleInitial>
+
+pred:  <GivenName>WILLIS</GivenName> <SuffixGenerational>III,</SuffixGenerational> <GivenName>RICHARD</GivenName> <Surname>C</Surname>
+true:  <Surname>WILLIS</Surname> <SuffixGenerational>III,</SuffixGenerational> <GivenName>RICHARD</GivenName> <MiddleInitial>C</MiddleInitial>
+
+pred:  <GivenName>Jin-Yi</GivenName> <Surname>Cai</Surname>
+true:  <GivenName>Jin-Yi</GivenName> <Surname>Cai</Surname>
+
+pred:  <Surname>ZANE</Surname>
+true:  <GivenName>ZANE</GivenName>
+
+pred:  <GivenName>PETER</GivenName> <Nickname>'PEDRO'</Nickname> <Surname>MCMILLAN,</Surname>
+true:  <Surname>MCMILLAN,</Surname> <GivenName>PETER</GivenName> <Nickname>'PEDRO'</Nickname>
+
+pred:  <GivenName>Mihai</GivenName> <Surname>Pop</Surname>
+true:  <GivenName>Mihai</GivenName> <Surname>Pop</Surname>
+
+pred:  <Surname>LYNN</Surname>
+true:  <Surname>LYNN</Surname>
+
+pred:  <GivenName>THomas</GivenName> <Nickname>"Woody"</Nickname> <Surname>Sampson</Surname> <SuffixGenerational>II</SuffixGenerational>
+true:  <GivenName>THomas</GivenName> <Nickname>"Woody"</Nickname> <Surname>Sampson</Surname> <SuffixGenerational>II</SuffixGenerational>
+
+pred:  <GivenName>FRANKLIN</GivenName>
+true:  <Surname>FRANKLIN</Surname>
+
+pred:  <GivenName>Lirong</GivenName> <Surname>Xia</Surname>
+true:  <GivenName>Lirong</GivenName> <Surname>Xia</Surname>
+
+pred:  <Surname>FROST</Surname>
+true:  <Surname>FROST</Surname>
+
+pred:  <GivenName>Sharon</GivenName> <MiddleInitial>A.</MiddleInitial> <Surname>Gay</Surname> <SuffixOther>Esq.</SuffixOther>
+true:  <GivenName>Sharon</GivenName> <MiddleInitial>A.</MiddleInitial> <Surname>Gay</Surname> <SuffixOther>Esq.</SuffixOther>
+
+pred:  <GivenName>John</GivenName> <Surname>bonner</Surname>
+true:  <GivenName>John</GivenName> <Surname>bonner</Surname>
+
+pred:  <GivenName>JENNIFER</GivenName> <GivenName>ALICE</GivenName> <Surname>WHITE</Surname>
+true:  <GivenName>JENNIFER</GivenName> <MiddleName>ALICE</MiddleName> <Surname>WHITE</Surname>
+
+pred:  <GivenName>THomas</GivenName> <Nickname>"Woody"</Nickname> <Surname>Sampson</Surname> <SuffixGenerational>II</SuffixGenerational>
+true:  <GivenName>THomas</GivenName> <Nickname>"Woody"</Nickname> <Surname>Sampson</Surname> <SuffixGenerational>II</SuffixGenerational>
+
+pred:  <FirstInitial>S.</FirstInitial> <Surname>Davenport</Surname>
+true:  <FirstInitial>S.</FirstInitial> <Surname>Davenport</Surname>
+
+pred:  <GivenName>Abraham</GivenName> <MiddleInitial>H</MiddleInitial> <Surname>Haddad</Surname>
+true:  <GivenName>Abraham</GivenName> <MiddleInitial>H</MiddleInitial> <Surname>Haddad</Surname>
+
+pred:  <PrefixMarital>MS</PrefixMarital> <GivenName>KEITHA</GivenName> <MiddleInitial>M</MiddleInitial> <Surname>ARNOLD</Surname>
+true:  <PrefixMarital>MS</PrefixMarital> <GivenName>KEITHA</GivenName> <MiddleName>M</MiddleName> <Surname>ARNOLD</Surname>
+
+pred:  <GivenName>BRAD</GivenName>
+true:  <GivenName>BRAD</GivenName>
+
+pred:  <GivenName>STEVENS</GivenName>
+true:  <Surname>STEVENS</Surname>
+
+pred:  <GivenName>Nick</GivenName> <Surname>Dickinson</Surname> <SuffixGenerational>II</SuffixGenerational>
+true:  <GivenName>Nick</GivenName> <Surname>Dickinson</Surname> <SuffixGenerational>II</SuffixGenerational>
+
+pred:  <GivenName>Yan</GivenName> <Surname>Liu</Surname>
+true:  <GivenName>Yan</GivenName> <Surname>Liu</Surname>
+
+pred:  <GivenName>Remzi</GivenName> <Surname>Arpaci-Dusseau</Surname>
+true:  <GivenName>Remzi</GivenName> <Surname>Arpaci-Dusseau</Surname>
+
+pred:  <GivenName>Jerry</GivenName> <Surname>Zhu</Surname>
+true:  <GivenName>Jerry</GivenName> <Surname>Zhu</Surname>
+
+pred:  <Surname>HOLLAND</Surname>
+true:  <Surname>HOLLAND</Surname>
+
+pred:  <GivenName>Michael</GivenName> <MiddleName>Johannes</MiddleName> <Surname>Jurgens,</Surname> <SuffixOther>MD</SuffixOther>
+true:  <GivenName>Michael</GivenName> <MiddleName>Johannes</MiddleName> <Surname>Jurgens,</Surname> <SuffixOther>MD</SuffixOther>
+
+pred:  <GivenName>PEDRO</GivenName> <Surname>MARTINEZ,</Surname>
+true:  <Surname>MARTINEZ,</Surname> <GivenName>PEDRO</GivenName>
+
+pred:  <GivenName>Emanuel</GivenName> <GivenName>Chris</GivenName> <Surname>Welch</Surname>
+true:  <GivenName>Emanuel</GivenName> <MiddleName>Chris</MiddleName> <Surname>Welch</Surname>
+
+pred:  <Surname>ROACH</Surname>
+true:  <Surname>ROACH</Surname>
+
+pred:  <GivenName>Harry</GivenName> <Surname>Xu</Surname>
+true:  <GivenName>Harry</GivenName> <Surname>Xu</Surname>
+
+pred:  <GivenName>PHILIP</GivenName>
+true:  <GivenName>PHILIP</GivenName>
+
+pred:  <GivenName>FAIRY</GivenName>
+true:  <GivenName>FAIRY</GivenName>
+
+pred:  <GivenName>AGUILAR</GivenName>
+true:  <Surname>AGUILAR</Surname>
+
+pred:  <PrefixOther>Dr.</PrefixOther> <And>and</And> <PrefixMarital>Mrs.</PrefixMarital> <GivenName>RUSKIN</GivenName> <Surname>LINES</Surname>
+true:  <PrefixOther>Dr</PrefixOther> <And>&</And> <PrefixMarital>Mrs</PrefixMarital> <GivenName>RUSKIN</GivenName> <Surname>LINES</Surname>
+
+pred:  <GivenName>TAPIA</GivenName>
+true:  <Surname>TAPIA</Surname>
+
+pred:  <GivenName>SALAS</GivenName>
+true:  <Surname>SALAS</Surname>
+
+pred:  <GivenName>terry</GivenName> <GivenName>t.</GivenName>
+true:  <GivenName>terry</GivenName> <LastInitial>t.</LastInitial>
+
+pred:  <GivenName>GEORGE</GivenName>
+true:  <GivenName>GEORGE</GivenName>
+
+pred:  <GivenName>Ben</GivenName> <MiddleInitial>Y.</MiddleInitial> <Surname>Zhao</Surname>
+true:  <GivenName>Ben</GivenName> <MiddleInitial>Y.</MiddleInitial> <Surname>Zhao</Surname>
+
+pred:  <GivenName>DYLAN</GivenName>
+true:  <GivenName>DYLAN</GivenName>
+
+pred:  <GivenName>Randal</GivenName> <MiddleInitial>C.</MiddleInitial> <Surname>Nelson</Surname>
+true:  <GivenName>Randal</GivenName> <MiddleInitial>C.</MiddleInitial> <Surname>Nelson</Surname>
+
+pred:  <GivenName>JOYCE</GivenName>
+true:  <GivenName>JOYCE</GivenName>
+
+pred:  <GivenName>DELENA</GivenName>
+true:  <GivenName>DELENA</GivenName>
+
+pred:  <GivenName>Kai</GivenName> <Surname>Shen</Surname>
+true:  <GivenName>Kai</GivenName> <Surname>Shen</Surname>
+
+pred:  <GivenName>tita</GivenName> <MiddleInitial>e.</MiddleInitial> <Surname>roach</Surname>
+true:  <GivenName>tita</GivenName> <MiddleInitial>e.</MiddleInitial> <Surname>roach</Surname>
+
+pred:  <GivenName>Gordon</GivenName> <MiddleInitial>S.</MiddleInitial> <Surname>Novak</Surname> <SuffixGenerational>Jr.</SuffixGenerational>
+true:  <GivenName>Gordon</GivenName> <MiddleInitial>S.</MiddleInitial> <Surname>Novak</Surname> <SuffixGenerational>Jr.</SuffixGenerational>
+
+pred:  <GivenName>Kevin</GivenName> <MiddleInitial>G.</MiddleInitial>
+true:  <GivenName>Kevin</GivenName> <LastInitial>G.</LastInitial>
+
+pred:  <GivenName>Letson</GivenName> <GivenName>Andrew</GivenName>
+true:  <Surname>Letson</Surname> <GivenName>Andrew</GivenName>
+
+pred:  <Surname>MIZZI,</Surname> <GivenName>MARY</GivenName> <MiddleInitial>A</MiddleInitial>
+true:  <Surname>MIZZI,</Surname> <GivenName>MARY</GivenName> <MiddleInitial>A</MiddleInitial>
+
+pred:  <GivenName>TANNER</GivenName>
+true:  <Surname>TANNER</Surname>
+
+pred:  <Surname>ALMAZAN,</Surname> <GivenName>SONIA</GivenName>
+true:  <Surname>ALMAZAN,</Surname> <GivenName>SONIA</GivenName>
+
+pred:  <GivenName>Percy</GivenName> <Surname>Liang</Surname>
+true:  <GivenName>Percy</GivenName> <Surname>Liang</Surname>
+
+pred:  <GivenName>J</GivenName> <MiddleName>Mark</MiddleName> <Surname>Bayless</Surname> <SuffixOther>DMD</SuffixOther>
+true:  <FirstInitial>J</FirstInitial> <MiddleName>Mark</MiddleName> <Surname>Bayless</Surname> <SuffixOther>DMD</SuffixOther>
+
+pred:  <FirstInitial>W.</FirstInitial> <GivenName>Terry</GivenName> <Surname>Wingfield</Surname>
+true:  <FirstInitial>W.</FirstInitial> <MiddleName>Terry</MiddleName> <Surname>Wingfield</Surname>
+
+pred:  <GivenName>Jinbo</GivenName> <Surname>Xu</Surname>
+true:  <GivenName>Jinbo</GivenName> <Surname>Xu</Surname>
+
+pred:  <GivenName>ROBIN</GivenName>
+true:  <GivenName>ROBIN</GivenName>
+
+pred:  <GivenName>SILAS</GivenName>
+true:  <GivenName>SILAS</GivenName>
+
+pred:  <GivenName>Robert</GivenName> <MiddleInitial>J.</MiddleInitial> <Surname>Michelich,</Surname> <SuffixOther>DDS</SuffixOther>
+true:  <GivenName>Robert</GivenName> <MiddleInitial>J.</MiddleInitial> <Surname>Michelich,</Surname> <SuffixOther>DDS</SuffixOther>
+
+pred:  <GivenName>Chunyi</GivenName> <Surname>Peng</Surname>
+true:  <GivenName>Chunyi</GivenName> <Surname>Peng</Surname>
+
+pred:  <GivenName>EDMOND</GivenName>
+true:  <GivenName>EDMOND</GivenName>
+
+pred:  <GivenName>Kevin</GivenName> <MiddleInitial>O.</MiddleInitial> <Surname>Neal,</Surname> <SuffixOther>MD</SuffixOther>
+true:  <GivenName>Kevin</GivenName> <Surname>O'Neal,</Surname> <SuffixOther>MD</SuffixOther>
+
+pred:  <GivenName>Padron</GivenName> <Surname>Andrea</Surname>
+true:  <Surname>Padron</Surname> <GivenName>Andrea</GivenName>
+
+pred:  <GivenName>Drew</GivenName> <Surname>McDermott</Surname>
+true:  <GivenName>Drew</GivenName> <Surname>McDermott</Surname>
+
+pred:  <GivenName>patty</GivenName> <And>and</And> <GivenName>bill</GivenName> <Surname>laskaris</Surname>
+true:  <GivenName>patty</GivenName> <And>and</And> <GivenName>bill</GivenName> <Surname>laskaris</Surname>
+
+pred:  <GivenName>Yalin</GivenName> <Surname>Wang</Surname>
+true:  <GivenName>Yalin</GivenName> <Surname>Wang</Surname>
+
+pred:  <GivenName>MASSEY</GivenName>
+true:  <Surname>MASSEY</Surname>
+
+pred:  <GivenName>CARIDAD</GivenName>
+true:  <GivenName>CARIDAD</GivenName>
+
+pred:  <GivenName>william</GivenName> <MiddleInitial>n.</MiddleInitial> <GivenName>wood</GivenName> <Surname>prince</Surname>
+true:  <GivenName>william</GivenName> <MiddleInitial>n.</MiddleInitial> <Surname>wood</Surname> <Surname>prince</Surname>
+
+pred:  <GivenName>Christine</GivenName> <MiddleInitial>A.</MiddleInitial> <Surname>Trojan,</Surname> <SuffixGenerational>BSN,</SuffixGenerational> <SuffixGenerational>RN,</SuffixGenerational>
+true:  <GivenName>Christine</GivenName> <MiddleInitial>A.</MiddleInitial> <Surname>Trojan,</Surname> <SuffixOther>BSN,</SuffixOther> <SuffixOther>RN,</SuffixOther>
+
+pred:  <GivenName>Sebastian</GivenName> <Surname>Seung</Surname>
+true:  <GivenName>Sebastian</GivenName> <Surname>Seung</Surname>
+
+pred:  <GivenName>Jim</GivenName> <MiddleInitial>B.</MiddleInitial>
+true:  <GivenName>Jim</GivenName> <LastInitial>B.</LastInitial>
+
+pred:  <PrefixOther>DR.</PrefixOther> <GivenName>Charles</GivenName> <Surname>Lamback,</Surname> <SuffixGenerational>Sr.</SuffixGenerational>
+true:  <PrefixOther>DR.</PrefixOther> <GivenName>Charles</GivenName> <Surname>Lamback,</Surname> <SuffixGenerational>Sr.</SuffixGenerational>
+
+pred:  <GivenName>Dan</GivenName> <And>and</And> <GivenName>Lilly</GivenName> <Surname>Immergluck</Surname>
+true:  <GivenName>Dan</GivenName> <And>and</And> <GivenName>Lilly</GivenName> <Surname>Immergluck</Surname>
+
+pred:  <GivenName>HARRIS</GivenName>
+true:  <Surname>HARRIS</Surname>
+
+pred:  <GivenName>HODGE</GivenName>
+true:  <Surname>HODGE</Surname>
+
+pred:  <GivenName>Tio</GivenName> <Surname>Hardiman</Surname> <And>&</And> <GivenName>Brunell</GivenName> <Surname>Donald</Surname>
+true:  <GivenName>Tio</GivenName> <Surname>Hardiman</Surname> <And>&</And> <GivenName>Brunell</GivenName> <Surname>Donald</Surname>
+
+pred:  <GivenName>GINO</GivenName>
+true:  <GivenName>GINO</GivenName>
+
+pred:  <GivenName>HARRIETTE</GivenName>
+true:  <GivenName>HARRIETTE</GivenName>
+
+pred:  <GivenName>STRICKLAND</GivenName>
+true:  <Surname>STRICKLAND</Surname>
+
+pred:  <GivenName>Charalampos</GivenName> <Nickname>(Babis)</Nickname> <Surname>Papamanthou</Surname>
+true:  <GivenName>Charalampos</GivenName> <Nickname>(Babis)</Nickname> <Surname>Papamanthou</Surname>
+
+pred:  <GivenName>FREDDY</GivenName>
+true:  <GivenName>FREDDY</GivenName>
+
+pred:  <GivenName>SOLOMON</GivenName>
+true:  <GivenName>SOLOMON</GivenName>
+
+pred:  <GivenName>Sariel</GivenName> <Surname>Har-Peled</Surname>
+true:  <GivenName>Sariel</GivenName> <Surname>Har-Peled</Surname>
+
+pred:  <GivenName>MILLARD</GivenName>
+true:  <GivenName>MILLARD</GivenName>
+
+pred:  <GivenName>NORRIS</GivenName>
+true:  <Surname>NORRIS</Surname>
+
+pred:  <GivenName>CAMPOS</GivenName>
+true:  <Surname>CAMPOS</Surname>
+
+pred:  <GivenName>GARNER</GivenName>
+true:  <Surname>GARNER</Surname>
+
+pred:  <Surname>DEAN</Surname>
+true:  <GivenName>DEAN</GivenName>
+
+pred:  <Surname>MERCER</Surname>
+true:  <Surname>MERCER</Surname>
+
+pred:  <Surname>HAHN</Surname>
+true:  <Surname>HAHN</Surname>
+
+pred:  <Surname>MALONE</Surname>
+true:  <Surname>MALONE</Surname>
+
+pred:  <Surname>ARNOLD</Surname>
+true:  <Surname>ARNOLD</Surname>
+
+pred:  <Surname>LE</Surname>
+true:  <Surname>LE</Surname>
+
+pred:  <Surname>ANGELES</Surname>
+true:  <GivenName>ANGELES</GivenName>
+
+pred:  <Surname>ELLIS</Surname>
+true:  <GivenName>ELLIS</GivenName>
+
+pred:  <GivenName>DAN</GivenName> <Surname>SLADE</Surname>
+true:  <GivenName>DAN</GivenName> <Surname>SLADE</Surname>
+
+pred:  <Surname>CHAPMAN</Surname>
+true:  <Surname>CHAPMAN</Surname>
+
+pred:  <GivenName>Shrikanth</GivenName> <Nickname>(Shri)</Nickname> <MiddleInitial>S.</MiddleInitial> <Surname>Narayanan</Surname>
+true:  <GivenName>Shrikanth</GivenName> <Nickname>(Shri)</Nickname> <MiddleInitial>S.</MiddleInitial> <Surname>Narayanan</Surname>
+
+pred:  <Surname>FLOYD</Surname>
+true:  <Surname>FLOYD</Surname>
+
+pred:  <GivenName>Paola</GivenName> <Initial>I.</Initial> <SuffixOther>M.D.</SuffixOther>
+true:  <GivenName>Paola</GivenName> <LastInitial>I.,</LastInitial> <SuffixOther>M.D.</SuffixOther>
+
+
+Metrics:
+no. of identical lines:                  64.0%
+no. of lines with all identical labels:  66.1%
+no. of individual identical labels:      81.3%
+
+
+Samples processed:  283
+Time elapsed:       94.53 seconds
+
+Process finished with exit code 0
