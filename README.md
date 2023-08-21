@@ -119,11 +119,16 @@ on a per-entity, rather than per-sample, basis.
 
 ## Results
 
-After improvements in the prompt template and hyperparameters, the parser achieves
+After improvements in the prompt and hyperparameters, the parser achieves
 **82.0%** accuracy of **entity recognition** as measured by the metric C on the test set.
 The accuracy of character-level (metric A) and entity-level (metric B) full exact matches is 67.4% and 69.0%, respectively.
+The raw (truncated) console output of this experiment is available in 
+[out_015_full.txt](https://github.com/mwojnars/chatgpt-name-parser/blob/master/experiments/out_015_full.txt) -
+the metrics can be found at the end. An Excel spreadsheet containing all the annotated samples
+compared side-by-side with the ground truth is available in 
+[out_015_full.xlsx](https://github.com/mwojnars/chatgpt-name-parser/blob/master/experiments/out_015_full.xlsx).
 
-Parsing of the entire set of 3000 samples takes about 1000 seconds when batches
+Parsing the entire set of 3000 samples takes about 1000 seconds when batches
 of 30 samples are submitted, which translates to approx. 0.33 sec per sample.
 The cost of the API calls is $0.30 for a full run over the entire data set,
 which is 1 cent per 100 samples.
@@ -135,8 +140,8 @@ many ambiguities in the ground truth annotations, like labelling "DAVID", or "HA
 as surnames instead of given names.
 
 All in all, there is still large room for improvement in the algorithm:
-through model fine-tuning, better choice of hyperparameters, prompt engineering, 
-post-processing of the output, etc. It is very likely the algorithm's accuracy 
-could surpass 90% on this dataset after improvements.
+through model fine-tuning, prompt engineering, hyperparameters optimization, 
+post-processing of the output, using additional data sources etc. 
+It is very likely the algorithm's accuracy could surpass 90% on this dataset after improvements.
 
 
